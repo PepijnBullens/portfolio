@@ -1,0 +1,153 @@
+@import './global.scss';
+
+.side-header {
+    width: 100px;
+    height: 400px;
+
+    position: fixed;
+    top: 50%;
+    left: 50px;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+
+    &.active {
+        opacity: 1;
+        pointer-events: all;
+        transition-delay: 700ms;
+    }
+
+    ul {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        &:hover li,
+        &.active li {
+            margin: 10px 0;
+
+            p {
+                opacity: 1;
+                pointer-events: all;
+            }
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            width: fit-content;
+            position: relative;
+            padding-left: 20px;
+            transition: all 0.3s ease;
+
+            .dot {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                left: 0;
+                transform: translateX(-50%);
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: $secondary-color;
+                margin: 1rem 0;
+                transition: all 0.3s ease;
+                margin-right: 20px;
+
+                &.active {
+                    width: 10px;
+                    height: 10px;
+                    background-color: $primary-color;
+                }
+            }
+
+            p {
+                opacity: 0;
+                pointer-events: none;
+                transition: all 0.3s ease;
+                cursor: pointer;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+        }
+    }
+}
+
+.section {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    scroll-behavior: smooth;
+
+    &.home {
+        background-color: $background-color-01;
+
+        .home-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 90%;
+
+            .home-content-info {
+                margin: 0 2rem;
+
+                h1 {
+                    font-size: 3rem;
+                    color: $text-primary-color;
+                }
+
+                p {
+                    font-size: 1.5rem;
+                    color: $text-secondary-color;
+                }
+            }
+
+            .home-content-image {
+                margin: 0 2rem;
+                width: 200px;
+                height: 200px;
+
+                img {
+                    width: auto;
+                    height: 200px;
+                    object-fit: contain;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    &.intro {
+        background-color: $background-color-02;
+
+        p {
+            width: 50%;
+            font-size: 1.5rem;
+            color: $text-secondary-color;
+        }
+    }
+
+    &.portfolio {
+        background-color: $background-color-03;
+    }
+
+    &.skills {
+        background-color: $background-color-04;
+    }
+
+    &.about-me {
+        background-color: $background-color-05;
+    }
+}

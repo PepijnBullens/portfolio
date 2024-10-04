@@ -1,0 +1,36 @@
+$background-color-01: #262626;
+$background-color-02: #1A1A1A;
+$background-color-03: #0D0D0D;
+$background-color-04: #333333;
+$background-color-05: #2C2C2C;
+
+$primary-color: #404040;
+$secondary-color: #A6A6A6;
+$text-primary-color: #F2F2F2;
+$text-secondary-color: #D9D9D9;
+$highlight-color: #A6A6A6;
+$border-color: #404040;
+
+@font-face {
+    font-family: 'satoshi';
+    src: url(../fonts/satoshi.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: satoshi;
+    color: $text-primary-color;
+}
+
+body {
+    opacity: 0;
+    transition: all 0.5s ease;
+    background-color: $background-color-01;
+    overflow: hidden;
+
+    &.loaded {
+        opacity: 1;
+    }
+}

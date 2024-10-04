@@ -1,0 +1,152 @@
+@font-face {
+  font-family: "satoshi";
+  src: url(../fonts/satoshi.ttf);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: satoshi;
+  color: #F2F2F2;
+}
+
+body {
+  opacity: 0;
+  transition: all 0.5s ease;
+  background-color: #262626;
+  overflow: hidden;
+}
+body.loaded {
+  opacity: 1;
+}
+
+.side-header {
+  width: 100px;
+  height: 400px;
+  position: fixed;
+  top: 50%;
+  left: 50px;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+}
+.side-header.active {
+  opacity: 1;
+  pointer-events: all;
+  transition-delay: 700ms;
+}
+.side-header ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.side-header ul:hover li, .side-header ul.active li {
+  margin: 10px 0;
+}
+.side-header ul:hover li p, .side-header ul.active li p {
+  opacity: 1;
+  pointer-events: all;
+}
+.side-header ul li {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  width: -moz-fit-content;
+  width: fit-content;
+  position: relative;
+  padding-left: 20px;
+  transition: all 0.3s ease;
+}
+.side-header ul li .dot {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #A6A6A6;
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+  margin-right: 20px;
+}
+.side-header ul li .dot.active {
+  width: 10px;
+  height: 10px;
+  background-color: #404040;
+}
+.side-header ul li p {
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+.side-header ul li p:hover {
+  color: #404040;
+}
+
+.section {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  scroll-behavior: smooth;
+}
+.section.home {
+  background-color: #262626;
+}
+.section.home .home-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90%;
+}
+.section.home .home-content .home-content-info {
+  margin: 0 2rem;
+}
+.section.home .home-content .home-content-info h1 {
+  font-size: 3rem;
+  color: #F2F2F2;
+}
+.section.home .home-content .home-content-info p {
+  font-size: 1.5rem;
+  color: #D9D9D9;
+}
+.section.home .home-content .home-content-image {
+  margin: 0 2rem;
+  width: 200px;
+  height: 200px;
+}
+.section.home .home-content .home-content-image img {
+  width: auto;
+  height: 200px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  border-radius: 50%;
+}
+.section.intro {
+  background-color: #1A1A1A;
+}
+.section.intro p {
+  width: 50%;
+  font-size: 1.5rem;
+  color: #D9D9D9;
+}
+.section.portfolio {
+  background-color: #0D0D0D;
+}
+.section.skills {
+  background-color: #333333;
+}
+.section.about-me {
+  background-color: #2C2C2C;
+}/*# sourceMappingURL=main.css.map */
