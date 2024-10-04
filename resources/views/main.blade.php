@@ -54,7 +54,30 @@
         <p>{!! $introText !!}</p>
     </div>
     <div class="section portfolio">
+        <div class="portfolio-project">
+            <div class="portfolio-image">
+                <div onclick="toggleProjectImage()" class="blur-effect"></div>
+                <img class="portfolio-image-controller left" onclick="previousImage();"
+                    src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
+                <img onclick="toggleProjectImage()" class="portfolio-image-image"
+                    src="{{ asset('imgs/placeholders/project_image.png') }}" alt="placeholder">
+                <img class="portfolio-image-controller right" onclick="nextImage();"
+                    src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
+            </div>
+            <div class="portfolio-info">
+                <h2 class="project-title">Project 1</h2>
+                <p class="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus
+                    nec nunc
+                    ultricies
+                    ultricies. Nullam nec purus nec nunc ultricies ultricies.</p>
+                <small class="project-date">10/4/2024</small>
+            </div>
+        </div>
 
+        <div class="portfolio-controller">
+            <img onclick="previousProject();" src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
+            <img onclick="nextProject();" src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
+        </div>
     </div>
     <div class="section skills">
 

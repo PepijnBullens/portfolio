@@ -4,6 +4,9 @@ const sections = document.querySelectorAll('.section');
 const dots = document.querySelectorAll('.dot');
 const side_header = document.querySelector('.side-header');
 
+
+let data = [];
+
 window.addEventListener('load', () => {
     const savedSection = localStorage.getItem('section');
     if (savedSection !== null) {
@@ -11,7 +14,62 @@ window.addEventListener('load', () => {
         sections[yPos].scrollIntoView();
     }
     updateUI();
+
+
+    fetch('/get-projects-request', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(_data => {
+            data = _data;
+            updateProject(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 });
+
+let currentProject = 0;
+let currentImage = 0;
+const portfolioImage = document.querySelector('.portfolio-image-image');
+const projectTitle = document.querySelector('.project-title');
+const projectDescription = document.querySelector('.project-description');
+const projectDate = document.querySelector('.project-date');
+
+function toggleProjectImage() {
+    document.querySelector('.blur-effect').classList.toggle('active');
+    document.querySelector('.portfolio-image-image').classList.toggle('active');
+}
+
+function updateProject(data) {
+
+    portfolioImage.src = data[currentProject]['images'][currentImage];
+    projectTitle.textContent = data[currentProject]['title'];
+    projectDescription.textContent = data[currentProject]['description'];
+    projectDate.textContent = data[currentProject]['date_created'];
+}
+
+function nextProject() {
+    currentImage = 0;
+    currentProject = Math.min(currentProject + 1, data.length - 1);
+    updateProject(data);
+}
+
+function previousProject() {
+    currentImage = 0;
+    currentProject = Math.max(currentProject - 1, 0);
+    updateProject(data);
+}
+
+function nextImage() {
+    currentImage = Math.min(currentImage + 1, data[currentProject]['images'].length - 1);
+    portfolioImage.src = data[currentProject]['images'][currentImage];
+}
+
+function previousImage() {
+    currentImage = Math.max(currentImage - 1, 0);
+    portfolioImage.src = data[currentProject]['images'][currentImage];
+}
 
 // Smooth scrolling function using requestAnimationFrame
 function smoothScroll(targetY, duration) {

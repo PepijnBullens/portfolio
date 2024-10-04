@@ -4,6 +4,7 @@
     width: 100px;
     height: 400px;
 
+    z-index: 998;
     position: fixed;
     top: 50%;
     left: 50px;
@@ -140,7 +141,130 @@
     }
 
     &.portfolio {
-        background-color: $background-color-03;
+        display: flex;
+        flex-direction: column;
+        background-color: $background-color-01;
+        position: relative;
+
+        .portfolio-project {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            height: 90%;
+
+            .portfolio-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 40%;
+                height: 100%;
+
+                .blur-effect.active {
+                    position: fixed;
+                    width: 100%;
+                    height: 100%;
+                    top: 0;
+                    left: 0;
+                    background-color: rgba(0, 0, 0, 0.5);
+                    z-index: 999;
+                }
+
+                .portfolio-image-image {
+                    width: 100%;
+                    object-fit: contain;
+                    border-radius: 10px;
+
+                    &.active {
+                        position: fixed;
+                        width: 80%;
+                        height: 80%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 1000;
+                    }
+                }
+
+                .portfolio-image-controller {
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 50%;
+                    padding: 5px;
+                    background-color: $primary-color;
+                    color: $background-color-01;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+
+                    &.left {
+                        left: -20px;
+                    }
+
+                    &.right {
+                        right: -20px;
+                    }
+
+                    &:hover {
+                        background-color: $secondary-color;
+                    }
+                }
+            }
+
+            .portfolio-info {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                h2 {
+                    font-size: 1.8rem;
+                    color: $text-primary-color;
+                    border-bottom: 1px solid $text-primary-color;
+                    padding-bottom: 0.5rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                    color: $text-secondary-color;
+                    margin: 1rem 0;
+
+                }
+
+                small {
+                    font-size: 1rem;
+                    color: $text-secondary-color;
+                }
+            }
+        }
+
+        .portfolio-controller {
+            height: 40px;
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+
+            img {
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                padding: 5px;
+                background-color: $primary-color;
+                color: $background-color-01;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
     }
 
     &.skills {

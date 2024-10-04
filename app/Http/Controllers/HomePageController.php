@@ -42,7 +42,7 @@ class HomePageController extends Controller
         }
         
         // Return a default image or null if everything fails
-        return asset('placeholders/profile_picture.png'); // Provide a default path
+        return asset('placeholders/profile_image.png'); // Provide a default path
     }
 
     private function fetchIntroText($baseUrl, $apiToken, $apiUrl) {
