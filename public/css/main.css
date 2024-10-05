@@ -227,17 +227,71 @@ body.loaded {
   color: #D9D9D9;
   margin: 1rem 0;
 }
-.section.portfolio .portfolio-project .portfolio-info small {
+.section.portfolio .portfolio-project .portfolio-info .portfolio-smalls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 0;
+}
+.section.portfolio .portfolio-project .portfolio-info .portfolio-smalls small {
   font-size: 1rem;
   color: #D9D9D9;
 }
 .section.portfolio .portfolio-controller {
   height: 40px;
+  display: flex;
   position: absolute;
   bottom: 40px;
   right: 40px;
 }
+.section.portfolio .portfolio-controller label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 5px;
+}
+.section.portfolio .portfolio-controller label:hover input {
+  width: 200px;
+  padding: 0 20px 0 0;
+  border-radius: 0 20px 20px 0;
+  transition-delay: 0ms;
+}
+.section.portfolio .portfolio-controller label:hover img {
+  border-radius: 50% 0 0 50%;
+  transition-delay: 0ms;
+}
+.section.portfolio .portfolio-controller label input {
+  width: 0;
+  height: 40px;
+  border: none;
+  border-radius: 20px;
+  padding: 0;
+  font-size: 1rem;
+  color: #D9D9D9;
+  background-color: #404040;
+  outline: none;
+  transition: all 0.3s ease;
+  transition-delay: 200ms;
+}
+.section.portfolio .portfolio-controller label img {
+  margin: 0;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  background-color: #404040;
+  color: #262626;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transition-delay: 200ms;
+}
+.section.portfolio .portfolio-controller label img:hover {
+  background-color: #404040;
+}
 .section.portfolio .portfolio-controller img {
+  margin: 0 5px;
   width: 40px;
   height: 40px;
   border: none;

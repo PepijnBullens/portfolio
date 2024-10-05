@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Portfolio - Pepijn Bullens</title>
 
@@ -70,11 +71,20 @@
                     nec nunc
                     ultricies
                     ultricies. Nullam nec purus nec nunc ultricies ultricies.</p>
-                <small class="project-date">10/4/2024</small>
+                <div class="portfolio-smalls">
+                    <small class="project-date">10/4/2024</small>
+                    <small class="project-link"><a target="_blank">Link naar
+                            project</a></small>
+                </div>
             </div>
         </div>
 
         <div class="portfolio-controller">
+            <label for="project-search">
+                <img onclick="searchForProject();" src="{{ asset('imgs/icon-magnifying-glass.svg') }}"
+                    alt="icon-magnifying-glass">
+                <input type="text" name="project-search" id="project-search">
+            </label>
             <img onclick="previousProject();" src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
             <img onclick="nextProject();" src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
         </div>

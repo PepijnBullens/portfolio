@@ -13,12 +13,12 @@ class HomePageController extends Controller
         $apiUrl = env('API_URL');
         return view('main', [
             'baseUrl' => $baseUrl,
-            'profilePicture' => $this->fetchProfilePicture($baseUrl, $apiToken, $apiUrl),
-            'introText' => $this->fetchIntroText($baseUrl, $apiToken, $apiUrl)
+            'profilePicture' => $this->fetchProfilePicture($apiToken, $apiUrl),
+            'introText' => $this->fetchIntroText($apiToken, $apiUrl)
         ]);
     }
 
-    private function fetchProfilePicture($baseUrl, $apiToken, $apiUrl) {
+    private function fetchProfilePicture($apiToken, $apiUrl) {
         $response = Http::withToken($apiToken)
             ->get($apiUrl . 'items/profile_picture');
 
@@ -45,7 +45,7 @@ class HomePageController extends Controller
         return asset('placeholders/profile_image.png'); // Provide a default path
     }
 
-    private function fetchIntroText($baseUrl, $apiToken, $apiUrl) {
+    private function fetchIntroText($apiToken, $apiUrl) {
         $response = Http::withToken($apiToken)
             ->get($apiUrl . 'items/intro_text');
 

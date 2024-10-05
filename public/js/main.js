@@ -4,6 +4,7 @@ const sections = document.querySelectorAll('.section');
 const dots = document.querySelectorAll('.dot');
 const side_header = document.querySelector('.side-header');
 
+const searchForProjectInput = document.querySelector('#project-search');
 
 let data = [];
 
@@ -27,7 +28,43 @@ window.addEventListener('load', () => {
         .catch(error => {
             console.error('Error:', error);
         });
+
+    // Add an event listener for 'keydown' on the input
+    searchForProjectInput.addEventListener('keydown', function (event) {
+        // Check if the 'Enter' key (key code 13) was pressed
+        if (event.key === 'Enter') {
+            // Prevent default behavior (form submission, etc.)
+            event.preventDefault();
+            searchForProject();
+        }
+    });
 });
+
+function searchForProject() {
+    const query = searchForProjectInput.value;
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch('/get-projects-by-name-request', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the headers
+            },
+            body: JSON.stringify({
+                query: query
+            })
+        })
+        .then(response => response.json())
+        .then(_data => {
+            data = _data;
+            updateProject(data);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
 
 let currentProject = 0;
 let currentImage = 0;
@@ -35,6 +72,7 @@ const portfolioImage = document.querySelector('.portfolio-image-image');
 const projectTitle = document.querySelector('.project-title');
 const projectDescription = document.querySelector('.project-description');
 const projectDate = document.querySelector('.project-date');
+const projectLink = document.querySelector('.project-link');
 
 function toggleProjectImage() {
     document.querySelector('.blur-effect').classList.toggle('active');
@@ -42,11 +80,17 @@ function toggleProjectImage() {
 }
 
 function updateProject(data) {
-
     portfolioImage.src = data[currentProject]['images'][currentImage];
     projectTitle.textContent = data[currentProject]['title'];
     projectDescription.textContent = data[currentProject]['description'];
     projectDate.textContent = data[currentProject]['date_created'];
+
+    if (data[currentProject]['project_link'] == null) {
+        projectLink.style.display = 'none';
+    } else {
+        projectLink.querySelector('a').href = data[currentProject]['project_link'];
+        projectLink.style.display = 'block';
+    }
 }
 
 function nextProject() {
