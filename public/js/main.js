@@ -58,6 +58,7 @@ function searchForProject() {
         .then(response => response.json())
         .then(_data => {
             data = _data;
+            currentImage = 0;
             updateProject(data);
         })
         .catch(error => {
@@ -69,10 +70,12 @@ function searchForProject() {
 let currentProject = 0;
 let currentImage = 0;
 const portfolioImage = document.querySelector('.portfolio-image-image');
+const portfolioImageControllers = document.querySelectorAll('.portfolio-image-controller');
 const projectTitle = document.querySelector('.project-title');
 const projectDescription = document.querySelector('.project-description');
 const projectDate = document.querySelector('.project-date');
 const projectLink = document.querySelector('.project-link');
+const noProjectFound = document.querySelector('.no-project-found');
 
 function toggleProjectImage() {
     document.querySelector('.blur-effect').classList.toggle('active');
@@ -80,16 +83,37 @@ function toggleProjectImage() {
 }
 
 function updateProject(data) {
-    portfolioImage.src = data[currentProject]['images'][currentImage];
-    projectTitle.textContent = data[currentProject]['title'];
-    projectDescription.textContent = data[currentProject]['description'];
-    projectDate.textContent = data[currentProject]['date_created'];
-
-    if (data[currentProject]['project_link'] == null) {
+    if (data.length == 0) {
+        noProjectFound.style.display = 'block';
+        projectTitle.textContent = '';
+        projectDescription.textContent = '';
+        projectDate.textContent = '';
+        portfolioImage.style.display = 'none';
+        portfolioImageControllers.forEach(controller => controller.style.display = 'none');
+        projectTitle.style.display = 'none';
+        projectDescription.style.display = 'none';
+        projectDate.style.display = 'none';
         projectLink.style.display = 'none';
+
     } else {
-        projectLink.querySelector('a').href = data[currentProject]['project_link'];
-        projectLink.style.display = 'block';
+        noProjectFound.style.display = 'none';
+
+        portfolioImage.src = data[currentProject]['images'][currentImage];
+        portfolioImage.style.display = 'block';
+        portfolioImageControllers.forEach(controller => controller.style.display = 'block');
+        projectTitle.textContent = data[currentProject]['title'];
+        projectTitle.style.display = 'block';
+        projectDescription.textContent = data[currentProject]['description'];
+        projectDescription.style.display = 'block';
+        projectDate.textContent = data[currentProject]['date_created'];
+        projectDate.style.display = 'block';
+
+        if (data[currentProject]['project_link'] == null) {
+            projectLink.style.display = 'none';
+        } else {
+            projectLink.querySelector('a').href = data[currentProject]['project_link'];
+            projectLink.style.display = 'block';
+        }
     }
 }
 

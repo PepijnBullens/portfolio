@@ -56,6 +56,7 @@
     </div>
     <div class="section portfolio">
         <div class="portfolio-project">
+            <h2 class="no-project-found">Geen project kunnen vinden...</h2>
             <div class="portfolio-image">
                 <div onclick="toggleProjectImage()" class="blur-effect"></div>
                 <img class="portfolio-image-controller left" onclick="previousImage();"
