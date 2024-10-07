@@ -8,3 +8,5 @@ Route::get('/', [HomePageController::class, 'index']);
 
 Route::get('/get-projects-request', [AjaxController::class, 'getProjects'])->name('get.projects.request');
 Route::post('/get-projects-by-name-request', [AjaxController::class, 'getProjectsByName'])->name('get.projects.by.name.request');
+
+Route::get('/get-skills-request', [AjaxController::class, 'getSkills'])->name('get.skills.request');

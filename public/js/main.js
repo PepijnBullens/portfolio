@@ -6,7 +6,22 @@ const side_header = document.querySelector('.side-header');
 
 const searchForProjectInput = document.querySelector('#project-search');
 
-let data = [];
+let projectData = [];
+let skillData = [];
+
+let currentProject = 0;
+let currentImage = 0;
+const projectImage = document.querySelector('.portfolio-image-image');
+const projectImageControllers = document.querySelectorAll('.portfolio-image-controller');
+const projectTitle = document.querySelector('.project-title');
+const projectDescription = document.querySelector('.project-description');
+const projectDate = document.querySelector('.project-date');
+const projectLink = document.querySelector('.project-link');
+const noProjectFound = document.querySelector('.no-project-found');
+
+let currentSkill = 0;
+const skillDivs = document.querySelectorAll('.skill');
+const noSkillFound = document.querySelector('.no-skill-found');
 
 window.addEventListener('load', () => {
     const savedSection = localStorage.getItem('section');
@@ -16,14 +31,25 @@ window.addEventListener('load', () => {
     }
     updateUI();
 
+    fetch('/get-skills-request', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(_data => {
+            skillData = _data;
+            updateSkill(skillData);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
     fetch('/get-projects-request', {
             method: 'GET'
         })
         .then(response => response.json())
         .then(_data => {
-            data = _data;
-            updateProject(data);
+            projectData = _data;
+            updateProject(projectData);
         })
         .catch(error => {
             console.error('Error:', error);
@@ -57,25 +83,14 @@ function searchForProject() {
         })
         .then(response => response.json())
         .then(_data => {
-            data = _data;
+            projectData = _data;
             currentImage = 0;
-            updateProject(data);
+            updateProject(projectData);
         })
         .catch(error => {
             console.error('Error:', error);
         });
 }
-
-
-let currentProject = 0;
-let currentImage = 0;
-const portfolioImage = document.querySelector('.portfolio-image-image');
-const portfolioImageControllers = document.querySelectorAll('.portfolio-image-controller');
-const projectTitle = document.querySelector('.project-title');
-const projectDescription = document.querySelector('.project-description');
-const projectDate = document.querySelector('.project-date');
-const projectLink = document.querySelector('.project-link');
-const noProjectFound = document.querySelector('.no-project-found');
 
 function toggleProjectImage() {
     document.querySelector('.blur-effect').classList.toggle('active');
@@ -88,8 +103,8 @@ function updateProject(data) {
         projectTitle.textContent = '';
         projectDescription.textContent = '';
         projectDate.textContent = '';
-        portfolioImage.style.display = 'none';
-        portfolioImageControllers.forEach(controller => controller.style.display = 'none');
+        projectImage.style.display = 'none';
+        projectImageControllers.forEach(controller => controller.style.display = 'none');
         projectTitle.style.display = 'none';
         projectDescription.style.display = 'none';
         projectDate.style.display = 'none';
@@ -98,9 +113,9 @@ function updateProject(data) {
     } else {
         noProjectFound.style.display = 'none';
 
-        portfolioImage.src = data[currentProject]['images'][currentImage];
-        portfolioImage.style.display = 'block';
-        portfolioImageControllers.forEach(controller => controller.style.display = 'block');
+        projectImage.src = data[currentProject]['images'][currentImage];
+        projectImage.style.display = 'block';
+        projectImageControllers.forEach(controller => controller.style.display = 'block');
         projectTitle.textContent = data[currentProject]['title'];
         projectTitle.style.display = 'block';
         projectDescription.textContent = data[currentProject]['description'];
@@ -117,6 +132,54 @@ function updateProject(data) {
     }
 }
 
+function updateSkill(data) {
+    if (data.length == 0) {
+        noSkillFound.style.display = 'block';
+
+        skillDivs.forEach(skillDiv => {
+            const skillImage = skillDiv.querySelector('.skill-image-image');
+            const skillName = skillDiv.querySelector('.skill-info-name');
+            const skillDate = skillDiv.querySelector('.skill-info-date');
+
+            skillImage.style.display = 'none';
+            skillName.style.display = 'none';
+            skillDate.style.display = 'none';
+
+            skillDiv.style.display = 'none';
+        });
+    } else {
+        skillDivs.forEach((skillDiv, index) => {
+            skillDiv.style.display = 'block';
+
+            const skillImage = skillDiv.querySelector('.skill-image-image');
+            const skillName = skillDiv.querySelector('.skill-info-name');
+            const skillDate = skillDiv.querySelector('.skill-info-date');
+
+            // Calculate the correct index in the data array
+            const i = currentSkill * 3 + index;
+
+            // Check if the index exists within the data array bounds
+            if (i < data.length) {
+                skillImage.src = data[i]['image'];
+                skillImage.style.display = 'block';
+                skillName.textContent = data[i]['name'];
+                skillName.style.display = 'block';
+                skillDate.textContent = data[i]['date'];
+                skillDate.style.display = 'block';
+            } else {
+                // If index is out of bounds, hide the elements
+                skillImage.style.display = 'none';
+                skillName.style.display = 'none';
+                skillDate.style.display = 'none';
+
+                skillDiv.style.display = 'none';
+            }
+        });
+
+        noSkillFound.style.display = 'none';
+    }
+}
+
 function nextProject() {
     currentImage = 0;
     currentProject = Math.min(currentProject + 1, data.length - 1);
@@ -129,14 +192,24 @@ function previousProject() {
     updateProject(data);
 }
 
+function nextSkill() {
+    currentSkill = Math.min(currentSkill + 1, Math.floor(skillData.length / 3));
+    updateSkill(skillData);
+}
+
+function previousSkill() {
+    currentSkill = Math.max(currentSkill - 1, 0);
+    updateSkill(skillData);
+}
+
 function nextImage() {
     currentImage = Math.min(currentImage + 1, data[currentProject]['images'].length - 1);
-    portfolioImage.src = data[currentProject]['images'][currentImage];
+    projectImage.src = data[currentProject]['images'][currentImage];
 }
 
 function previousImage() {
     currentImage = Math.max(currentImage - 1, 0);
-    portfolioImage.src = data[currentProject]['images'][currentImage];
+    projectImage.src = data[currentProject]['images'][currentImage];
 }
 
 // Smooth scrolling function using requestAnimationFrame

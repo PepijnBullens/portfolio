@@ -91,7 +91,49 @@
         </div>
     </div>
     <div class="section skills">
+        <div class="skills-container">
+            <h2 class="no-skill-found">Geen vaardigheid kunnen vinden...</h2>
+            <div class="skill">
+                <div class="skill-image">
+                    <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
+                        alt="placeholder">
+                </div>
+                <div class="skill-info">
+                    <p class="skill-info-name">Lorem ipsum</p>
+                    <small class="skill-info-date">10/4/2024</small>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-image">
+                    <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
+                        alt="placeholder">
+                </div>
+                <div class="skill-info">
+                    <p class="skill-info-name">Lorem ipsum</p>
+                    <small class="skill-info-date">10/4/2024</small>
+                </div>
+            </div>
+            <div class="skill">
+                <div class="skill-image">
+                    <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
+                        alt="placeholder">
+                </div>
+                <div class="skill-info">
+                    <p class="skill-info-name">Lorem ipsum</p>
+                    <small class="skill-info-date">10/4/2024</small>
+                </div>
+            </div>
+        </div>
 
+        <div class="skill-controller">
+            <label for="skill-search">
+                <img onclick="searchForSkill();" src="{{ asset('imgs/icon-magnifying-glass.svg') }}"
+                    alt="icon-magnifying-glass">
+                <input type="text" name="skill-search" id="skill-search">
+            </label>
+            <img onclick="previousSkill();" src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
+            <img onclick="nextSkill();" src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
+        </div>
     </div>
     <div class="section about-me">
 

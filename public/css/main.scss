@@ -331,6 +331,134 @@
 
     &.skills {
         background-color: $background-color-04;
+        position: relative;
+
+        .skills-container {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            width: 70%;
+            height: 90%;
+            gap: 20px;
+
+            .skill {
+                width: 33.3333%;
+                height: 70%;
+
+                .skill-image {
+                    width: 100%;
+                    height: 70%;
+                    background-color: $primary-color;
+                    padding: 60px;
+                    border-radius: 10px 10px 0 0;
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                    }
+                }
+
+                .skill-info {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
+                    background-color: $background-color-01;
+                    padding: 10px;
+                    border-radius: 0 0 10px 10px;
+
+                    p {
+                        font-size: 1.6rem;
+                    }
+
+                    small {
+                        font-size: 1rem;
+                        color: $text-secondary-color;
+                    }
+                }
+            }
+        }
+
+        .skill-controller {
+            height: 40px;
+            display: flex;
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+
+            label {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin: 0 5px;
+
+                &:hover {
+                    input {
+                        width: 200px;
+                        padding: 0 20px 0 0;
+                        border-radius: 0 20px 20px 0;
+                        transition-delay: 0ms;
+                    }
+
+                    img {
+                        border-radius: 50% 0 0 50%;
+                        transition-delay: 0ms;
+                    }
+                }
+
+                input {
+                    width: 0;
+                    height: 40px;
+                    border: none;
+                    border-radius: 20px;
+                    padding: 0;
+                    font-size: 1rem;
+                    color: $text-secondary-color;
+                    background-color: $primary-color;
+                    outline: none;
+                    transition: all 0.3s ease;
+                    transition-delay: 200ms;
+                }
+
+                img {
+                    margin: 0;
+                    width: 40px;
+                    height: 40px;
+                    border: none;
+                    border-radius: 50%;
+                    padding: 10px;
+                    background-color: $primary-color;
+                    color: $background-color-01;
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                    transition-delay: 200ms;
+
+                    &:hover {
+                        background-color: $primary-color;
+                    }
+                }
+            }
+
+            img {
+                margin: 0 5px;
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                padding: 5px;
+                background-color: $primary-color;
+                color: $background-color-01;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
     }
 
     &.about-me {
