@@ -10,3 +10,4 @@ Route::get('/get-projects-request', [AjaxController::class, 'getProjects'])->nam
 Route::post('/get-projects-by-name-request', [AjaxController::class, 'getProjectsByName'])->name('get.projects.by.name.request');
 
 Route::get('/get-skills-request', [AjaxController::class, 'getSkills'])->name('get.skills.request');
+Route::post('/get-skills-by-name-request', [AjaxController::class, 'getSkillsByName'])->name('get.skills.by.name.request');

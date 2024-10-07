@@ -5,6 +5,7 @@ const dots = document.querySelectorAll('.dot');
 const side_header = document.querySelector('.side-header');
 
 const searchForProjectInput = document.querySelector('#project-search');
+const searchForSkillInput = document.querySelector('#skill-search');
 
 let projectData = [];
 let skillData = [];
@@ -64,6 +65,16 @@ window.addEventListener('load', () => {
             searchForProject();
         }
     });
+
+    // Add an event listener for 'keydown' on the input
+    searchForSkillInput.addEventListener('keydown', function (event) {
+        // Check if the 'Enter' key (key code 13) was pressed
+        if (event.key === 'Enter') {
+            // Prevent default behavior (form submission, etc.)
+            event.preventDefault();
+            searchForSkill();
+        }
+    });
 });
 
 function searchForProject() {
@@ -86,6 +97,31 @@ function searchForProject() {
             projectData = _data;
             currentImage = 0;
             updateProject(projectData);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+function searchForSkill() {
+    const query = searchForSkillInput.value;
+
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    fetch('/get-skills-by-name-request', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the headers
+            },
+            body: JSON.stringify({
+                query: query
+            })
+        })
+        .then(response => response.json())
+        .then(_data => {
+            skillData = _data;
+            updateSkill(skillData);
         })
         .catch(error => {
             console.error('Error:', error);
