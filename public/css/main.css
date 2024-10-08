@@ -10,6 +10,13 @@
   color: #F2F2F2;
 }
 
+html {
+  touch-action: manipulation;
+  /* Prevents double-tap to zoom */
+  -ms-touch-action: manipulation;
+  /* For IE/Edge compatibility */
+}
+
 body {
   opacity: 0;
   transition: all 0.5s ease;
@@ -19,6 +26,27 @@ body {
 body.loaded {
   opacity: 1;
 }
+body h1 {
+  font-size: clamp(20px, 4vw, 52px);
+}
+body h2 {
+  font-size: clamp(18px, 3vw, 46px);
+}
+body h3 {
+  font-size: clamp(16px, 2vw, 42px);
+}
+body h4 {
+  font-size: clamp(14px, 1.5vw, 38px);
+}
+body h5 {
+  font-size: clamp(12px, 1vw, 34px);
+}
+body h6 {
+  font-size: clamp(10px, 0.5vw, 30px);
+}
+body p {
+  font-size: clamp(12px, 1.5vw, 32px);
+}
 
 .side-header {
   width: 100px;
@@ -26,7 +54,7 @@ body.loaded {
   z-index: 998;
   position: fixed;
   top: 50%;
-  left: 50px;
+  left: 2rem;
   transform: translateY(-50%);
   display: flex;
   justify-content: center;
@@ -94,11 +122,10 @@ body.loaded {
 
 .section {
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - env(safe-area-inset-bottom));
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 2rem;
   scroll-behavior: smooth;
 }
 .section.home {
@@ -115,11 +142,9 @@ body.loaded {
   margin: 0 2rem;
 }
 .section.home .home-content .home-content-info h1 {
-  font-size: 3rem;
   color: #F2F2F2;
 }
 .section.home .home-content .home-content-info p {
-  font-size: 1.5rem;
   color: #D9D9D9;
 }
 .section.home .home-content .home-content-image {
@@ -139,7 +164,6 @@ body.loaded {
 }
 .section.intro p {
   width: 50%;
-  font-size: 1.5rem;
   color: #D9D9D9;
 }
 .section.portfolio {
@@ -196,7 +220,6 @@ body.loaded {
   padding: 5px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -217,13 +240,11 @@ body.loaded {
   justify-content: center;
 }
 .section.portfolio .portfolio-project .portfolio-info h2 {
-  font-size: 1.8rem;
   color: #F2F2F2;
   border-bottom: 1px solid #F2F2F2;
   padding-bottom: 0.5rem;
 }
 .section.portfolio .portfolio-project .portfolio-info p {
-  font-size: 1rem;
   color: #D9D9D9;
   margin: 1rem 0;
 }
@@ -234,7 +255,6 @@ body.loaded {
   margin: 1rem 0;
 }
 .section.portfolio .portfolio-project .portfolio-info .portfolio-smalls small {
-  font-size: 1rem;
   color: #D9D9D9;
 }
 .section.portfolio .portfolio-controller {
@@ -266,7 +286,6 @@ body.loaded {
   border: none;
   border-radius: 20px;
   padding: 0;
-  font-size: 1rem;
   color: #D9D9D9;
   background-color: #404040;
   outline: none;
@@ -282,7 +301,6 @@ body.loaded {
   padding: 10px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   transition-delay: 200ms;
@@ -299,7 +317,6 @@ body.loaded {
   padding: 5px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -344,11 +361,7 @@ body.loaded {
   padding: 10px;
   border-radius: 0 0 10px 10px;
 }
-.section.skills .skills-container .skill .skill-info p {
-  font-size: 1.6rem;
-}
 .section.skills .skills-container .skill .skill-info small {
-  font-size: 1rem;
   color: #D9D9D9;
 }
 .section.skills .skill-controller {
@@ -380,7 +393,6 @@ body.loaded {
   border: none;
   border-radius: 20px;
   padding: 0;
-  font-size: 1rem;
   color: #D9D9D9;
   background-color: #404040;
   outline: none;
@@ -396,7 +408,6 @@ body.loaded {
   padding: 10px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
   transition-delay: 200ms;
@@ -413,7 +424,6 @@ body.loaded {
   padding: 5px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
@@ -455,13 +465,11 @@ body.loaded {
   justify-content: center;
 }
 .section.about-me .about-me .about-me-info h2 {
-  font-size: 1.8rem;
   color: #F2F2F2;
   border-bottom: 1px solid #F2F2F2;
   padding-bottom: 0.5rem;
 }
 .section.about-me .about-me .about-me-info p {
-  font-size: 1rem;
   color: #D9D9D9;
   margin: 1rem 0;
 }
@@ -481,10 +489,96 @@ body.loaded {
   padding: 5px;
   background-color: #404040;
   color: #262626;
-  font-size: 1.5rem;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 .section.about-me .about-me-controller img:hover {
   background-color: #A6A6A6;
+}
+
+@media only screen and (max-width: 1000px) {
+  .side-header {
+    display: none;
+  }
+  .section.home .home-content {
+    flex-direction: column;
+    gap: 40px;
+  }
+  .section.home .home-content .home-content-info {
+    order: 2;
+  }
+  .section.home .home-content .home-content-image {
+    order: 1;
+  }
+  .section.intro p {
+    line-height: 25px;
+    font-size: clamp(8px, 4vw, 58px);
+  }
+  .section.portfolio .portfolio-project {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+  }
+  .section.portfolio .portfolio-project .portfolio-image {
+    width: 100%;
+    height: 25vh;
+  }
+  .section.portfolio .portfolio-project .portfolio-image .portfolio-image-image {
+    height: 100%;
+  }
+  .section.portfolio .portfolio-project .portfolio-info {
+    width: 100%;
+    height: 50vh;
+    max-height: 50vh;
+  }
+  .section.portfolio .portfolio-project .portfolio-info p {
+    overflow: auto;
+  }
+  .section.portfolio .portfolio-controller {
+    bottom: 20px;
+    right: 20px;
+  }
+  .section.portfolio .portfolio-controller label:hover input {
+    width: calc(100vw - 190px);
+  }
+  .section.skills .skills-container .skill {
+    width: 100%;
+    height: 50vh;
+  }
+  .section.skills .skills-container .skill .skill-image {
+    height: 60%;
+    border-radius: 20px 20px 0 0;
+  }
+  .section.skills .skills-container .skill .skill-info {
+    height: 40%;
+    justify-content: center;
+    border-radius: 0 0 20px 20px;
+  }
+  .section.skills .skill-controller {
+    bottom: 20px;
+    right: 20px;
+  }
+  .section.skills .skill-controller label:hover input {
+    width: calc(100vw - 190px);
+  }
+  .section.about-me .about-me {
+    flex-direction: column;
+    justify-content: center;
+    gap: 40px;
+  }
+  .section.about-me .about-me .about-me-image {
+    width: 100%;
+    height: 25vh;
+  }
+  .section.about-me .about-me .about-me-image img {
+    height: 100%;
+  }
+  .section.about-me .about-me .about-me-info {
+    width: 100%;
+    height: 50vh;
+    max-height: 40vh;
+  }
+  .section.about-me .about-me .about-me-info p {
+    overflow: auto;
+  }
 }/*# sourceMappingURL=main.css.map */

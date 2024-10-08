@@ -7,7 +7,7 @@
     z-index: 998;
     position: fixed;
     top: 50%;
-    left: 50px;
+    left: 2rem;
     transform: translateY(-50%);
     display: flex;
     justify-content: center;
@@ -84,11 +84,10 @@
 
 .section {
     width: 100%;
-    height: 100vh;
+    height: calc(100vh - env(safe-area-inset-bottom));
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 2rem;
     scroll-behavior: smooth;
 
     &.home {
@@ -105,12 +104,10 @@
                 margin: 0 2rem;
 
                 h1 {
-                    font-size: 3rem;
                     color: $text-primary-color;
                 }
 
                 p {
-                    font-size: 1.5rem;
                     color: $text-secondary-color;
                 }
             }
@@ -135,7 +132,6 @@
 
         p {
             width: 50%;
-            font-size: 1.5rem;
             color: $text-secondary-color;
         }
     }
@@ -196,7 +192,6 @@
                     padding: 5px;
                     background-color: $primary-color;
                     color: $background-color-01;
-                    font-size: 1.5rem;
                     cursor: pointer;
                     transition: all 0.3s ease;
 
@@ -222,14 +217,12 @@
                 justify-content: center;
 
                 h2 {
-                    font-size: 1.8rem;
                     color: $text-primary-color;
                     border-bottom: 1px solid $text-primary-color;
                     padding-bottom: 0.5rem;
                 }
 
                 p {
-                    font-size: 1rem;
                     color: $text-secondary-color;
                     margin: 1rem 0;
                 }
@@ -241,7 +234,6 @@
                     margin: 1rem 0;
 
                     small {
-                        font-size: 1rem;
                         color: $text-secondary-color;
                     }
                 }
@@ -281,7 +273,6 @@
                     border: none;
                     border-radius: 20px;
                     padding: 0;
-                    font-size: 1rem;
                     color: $text-secondary-color;
                     background-color: $primary-color;
                     outline: none;
@@ -298,7 +289,6 @@
                     padding: 10px;
                     background-color: $primary-color;
                     color: $background-color-01;
-                    font-size: 1.5rem;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     transition-delay: 200ms;
@@ -318,7 +308,6 @@
                 padding: 5px;
                 background-color: $primary-color;
                 color: $background-color-01;
-                font-size: 1.5rem;
                 cursor: pointer;
                 transition: all 0.3s ease;
 
@@ -368,12 +357,7 @@
                     padding: 10px;
                     border-radius: 0 0 10px 10px;
 
-                    p {
-                        font-size: 1.6rem;
-                    }
-
                     small {
-                        font-size: 1rem;
                         color: $text-secondary-color;
                     }
                 }
@@ -413,7 +397,6 @@
                     border: none;
                     border-radius: 20px;
                     padding: 0;
-                    font-size: 1rem;
                     color: $text-secondary-color;
                     background-color: $primary-color;
                     outline: none;
@@ -430,7 +413,6 @@
                     padding: 10px;
                     background-color: $primary-color;
                     color: $background-color-01;
-                    font-size: 1.5rem;
                     cursor: pointer;
                     transition: all 0.3s ease;
                     transition-delay: 200ms;
@@ -450,7 +432,6 @@
                 padding: 5px;
                 background-color: $primary-color;
                 color: $background-color-01;
-                font-size: 1.5rem;
                 cursor: pointer;
                 transition: all 0.3s ease;
 
@@ -498,14 +479,12 @@
                 justify-content: center;
 
                 h2 {
-                    font-size: 1.8rem;
                     color: $text-primary-color;
                     border-bottom: 1px solid $text-primary-color;
                     padding-bottom: 0.5rem;
                 }
 
                 p {
-                    font-size: 1rem;
                     color: $text-secondary-color;
                     margin: 1rem 0;
                 }
@@ -528,12 +507,139 @@
                 padding: 5px;
                 background-color: $primary-color;
                 color: $background-color-01;
-                font-size: 1.5rem;
                 cursor: pointer;
                 transition: all 0.3s ease;
 
                 &:hover {
                     background-color: $secondary-color;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .side-header {
+        display: none;
+    }
+
+    .section {
+
+        &.home {
+            .home-content {
+                flex-direction: column;
+                gap: 40px;
+
+                .home-content-info {
+                    order: 2;
+                }
+
+                .home-content-image {
+                    order: 1;
+                }
+            }
+        }
+
+        &.intro p {
+            line-height: 25px;
+            font-size: clamp(8px, 4vw, 58px);
+        }
+
+        &.portfolio {
+            .portfolio-project {
+                flex-direction: column;
+                justify-content: flex-start;
+                gap: 40px;
+
+                .portfolio-image {
+                    width: 100%;
+                    height: 25vh;
+
+                    .portfolio-image-image {
+                        height: 100%;
+                    }
+                }
+
+                .portfolio-info {
+                    width: 100%;
+                    height: 50vh;
+                    max-height: 50vh;
+
+                    p {
+                        overflow: auto;
+                    }
+                }
+            }
+
+            .portfolio-controller {
+                bottom: 20px;
+                right: 20px;
+
+                label {
+
+                    &:hover input {
+                        width: calc(100vw - 190px);
+                    }
+                }
+            }
+        }
+
+        &.skills {
+            .skills-container {
+                .skill {
+                    width: 100%;
+                    height: 50vh;
+
+                    .skill-image {
+                        height: 60%;
+                        border-radius: 20px 20px 0 0;
+                    }
+
+                    .skill-info {
+                        height: 40%;
+                        justify-content: center;
+                        border-radius: 0 0 20px 20px;
+                    }
+                }
+            }
+
+            .skill-controller {
+                bottom: 20px;
+                right: 20px;
+
+                label {
+
+                    &:hover input {
+                        width: calc(100vw - 190px);
+                    }
+                }
+            }
+        }
+
+        &.about-me {
+
+            .about-me {
+                flex-direction: column;
+                justify-content: center;
+                gap: 40px;
+
+                .about-me-image {
+                    width: 100%;
+                    height: 25vh;
+
+                    img {
+                        height: 100%;
+                    }
+                }
+
+                .about-me-info {
+                    width: 100%;
+                    height: 50vh;
+                    max-height: 40vh;
+
+                    p {
+                        overflow: auto;
+                    }
                 }
             }
         }

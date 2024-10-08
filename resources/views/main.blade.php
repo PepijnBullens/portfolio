@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Portfolio - Pepijn Bullens</title>
@@ -68,7 +68,8 @@
             </div>
             <div class="portfolio-info">
                 <h2 class="project-title">Project</h2>
-                <p class="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus
+                <p class="project-description scrollable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nullam nec purus
                     nec nunc
                     ultricies
                     ultricies. Nullam nec purus nec nunc ultricies ultricies.</p>
@@ -143,7 +144,8 @@
             </div>
             <div class="about-me-info">
                 <h2 class="about-me-title">over mij</h2>
-                <p class="about-me-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
+                <p class="about-me-description scrollable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Nullam nec
                     purus
                     nec nunc
                     ultricies

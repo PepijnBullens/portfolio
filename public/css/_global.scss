@@ -24,6 +24,13 @@ $border-color: #404040;
     color: $text-primary-color;
 }
 
+html {
+    touch-action: manipulation;
+    /* Prevents double-tap to zoom */
+    -ms-touch-action: manipulation;
+    /* For IE/Edge compatibility */
+}
+
 body {
     opacity: 0;
     transition: all 0.5s ease;
@@ -33,4 +40,34 @@ body {
     &.loaded {
         opacity: 1;
     }
+
+    h1 {
+        font-size: clamp(20px, 4vw, 52px);
+    }
+
+    h2 {
+        font-size: clamp(18px, 3vw, 46px);
+    }
+
+    h3 {
+        font-size: clamp(16px, 2vw, 42px);
+    }
+
+    h4 {
+        font-size: clamp(14px, 1.5vw, 38px);
+    }
+
+    h5 {
+        font-size: clamp(12px, 1vw, 34px);
+    }
+
+    h6 {
+        font-size: clamp(10px, 0.5vw, 30px);
+    }
+
+    p {
+        font-size: clamp(12px, 1.5vw, 32px);
+    }
+
+
 }
