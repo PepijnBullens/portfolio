@@ -120,6 +120,7 @@ function searchForSkill() {
         })
         .then(response => response.json())
         .then(_data => {
+            currentSkill = 0;
             skillData = _data;
             updateSkill(skillData);
         })
@@ -217,15 +218,19 @@ function updateSkill(data) {
 }
 
 function nextProject() {
-    currentImage = 0;
-    currentProject = Math.min(currentProject + 1, data.length - 1);
-    updateProject(data);
+    if (currentProject < projectData.length - 1) {
+        currentImage = 0;
+        currentProject = Math.min(currentProject + 1, projectData.length - 1);
+        updateProject(projectData);
+    }
 }
 
 function previousProject() {
-    currentImage = 0;
-    currentProject = Math.max(currentProject - 1, 0);
-    updateProject(data);
+    if (currentProject > 0) {
+        currentImage = 0;
+        currentProject = Math.max(currentProject - 1, 0);
+        updateProject(projectData);
+    }
 }
 
 function nextSkill() {
@@ -239,13 +244,13 @@ function previousSkill() {
 }
 
 function nextImage() {
-    currentImage = Math.min(currentImage + 1, data[currentProject]['images'].length - 1);
-    projectImage.src = data[currentProject]['images'][currentImage];
+    currentImage = Math.min(currentImage + 1, projectData[currentProject]['images'].length - 1);
+    projectImage.src = projectData[currentProject]['images'][currentImage];
 }
 
 function previousImage() {
     currentImage = Math.max(currentImage - 1, 0);
-    projectImage.src = data[currentProject]['images'][currentImage];
+    projectImage.src = projectData[currentProject]['images'][currentImage];
 }
 
 // Smooth scrolling function using requestAnimationFrame
