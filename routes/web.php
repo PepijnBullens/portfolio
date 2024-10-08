@@ -11,3 +11,5 @@ Route::post('/get-projects-by-name-request', [AjaxController::class, 'getProject
 
 Route::get('/get-skills-request', [AjaxController::class, 'getSkills'])->name('get.skills.request');
 Route::post('/get-skills-by-name-request', [AjaxController::class, 'getSkillsByName'])->name('get.skills.by.name.request');
+
+Route::get('/get-about-me-request', [AjaxController::class, 'getAboutMe'])->name('get.about.me.request');

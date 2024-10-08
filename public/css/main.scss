@@ -463,5 +463,79 @@
 
     &.about-me {
         background-color: $background-color-05;
+
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        .about-me {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 70%;
+            height: 90%;
+
+            .about-me-image {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                width: 40%;
+                height: 100%;
+
+                img {
+                    width: 100%;
+                    object-fit: contain;
+                    border-radius: 10px;
+                }
+            }
+
+            .about-me-info {
+                width: 50%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+
+                h2 {
+                    font-size: 1.8rem;
+                    color: $text-primary-color;
+                    border-bottom: 1px solid $text-primary-color;
+                    padding-bottom: 0.5rem;
+                }
+
+                p {
+                    font-size: 1rem;
+                    color: $text-secondary-color;
+                    margin: 1rem 0;
+                }
+            }
+        }
+
+        .about-me-controller {
+            height: 40px;
+            display: flex;
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+
+            img {
+                margin: 0 5px;
+                width: 40px;
+                height: 40px;
+                border: none;
+                border-radius: 50%;
+                padding: 5px;
+                background-color: $primary-color;
+                color: $background-color-01;
+                font-size: 1.5rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                &:hover {
+                    background-color: $secondary-color;
+                }
+            }
+        }
     }
 }

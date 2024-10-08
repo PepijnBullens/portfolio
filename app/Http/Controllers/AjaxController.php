@@ -9,6 +9,45 @@ use DateTime;
 
 class AjaxController extends Controller
 {
+    public function getAboutMe()
+    {
+        return $this->getAboutMeData();
+    }
+
+    private function getAboutMeData() {
+        $apiToken = env('API_TOKEN');
+        $apiUrl = env('API_URL');
+
+        $filter = [
+            'sort' => 'order_number'
+        ];
+
+        $response = Http::withToken($apiToken)
+        ->get($apiUrl . 'items/about_me', $filter);
+
+        // Check response status and handle the response data
+        if ($response->successful()) {
+            $data = $response->json();
+            foreach($data['data'] as $key => $item) {
+                $returnedData[$key] = [
+                    'title' => $item['title'],
+                    'image' => $apiUrl . 'assets/' . $item['image'],
+                    'description' => $item['description']
+                ];
+            }
+            
+            return response()->json($returnedData);
+        } else {
+            Log::error('Failed to fetch projects', [
+                'status' => $response->status(),
+                'body' => $response->body()
+            ]);
+        }
+        
+        // Return an empty array if everything fails
+        return response()->json([]);
+    }    
+
     public function getSkillsByName(Request $request) {
 
         $query = $request->input('query');

@@ -67,7 +67,7 @@
                     src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
             </div>
             <div class="portfolio-info">
-                <h2 class="project-title">Project 1</h2>
+                <h2 class="project-title">Project</h2>
                 <p class="project-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec purus
                     nec nunc
                     ultricies
@@ -136,7 +136,24 @@
         </div>
     </div>
     <div class="section about-me">
-
+        <div class="about-me">
+            <h2 class="no-about-me-found">Geen informatie kunnen vinden...</h2>
+            <div class="about-me-image">
+                <img src="{{ asset('imgs/placeholders/about_me_image.png') }}" alt="placeholder">
+            </div>
+            <div class="about-me-info">
+                <h2 class="about-me-title">over mij</h2>
+                <p class="about-me-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec
+                    purus
+                    nec nunc
+                    ultricies
+                    ultricies. Nullam nec purus nec nunc ultricies ultricies.</p>
+            </div>
+        </div>
+        <div class="about-me-controller">
+            <img onclick="previousAboutMe();" src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
+            <img onclick="nextAboutMe();" src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
+        </div>
     </div>
 </body>
 

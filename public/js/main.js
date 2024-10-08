@@ -9,6 +9,7 @@ const searchForSkillInput = document.querySelector('#skill-search');
 
 let projectData = [];
 let skillData = [];
+let aboutMeData = [];
 
 let currentProject = 0;
 let currentImage = 0;
@@ -24,13 +25,32 @@ let currentSkill = 0;
 const skillDivs = document.querySelectorAll('.skill');
 const noSkillFound = document.querySelector('.no-skill-found');
 
+let currentAboutMe = 0;
+const aboutMeImage = document.querySelector('.about-me-image img');
+const aboutMeTitle = document.querySelector('.about-me-title');
+const aboutMeDescription = document.querySelector('.about-me-description');
+const noAboutMeFound = document.querySelector('.no-about-me-found');
+
 window.addEventListener('load', () => {
     const savedSection = localStorage.getItem('section');
     if (savedSection !== null) {
         yPos = savedSection;
         sections[yPos].scrollIntoView();
     }
+
     updateUI();
+
+    fetch('/get-about-me-request', {
+            method: 'GET'
+        })
+        .then(response => response.json())
+        .then(_data => {
+            aboutMeData = _data;
+            updateAboutMe(aboutMeData);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 
     fetch('/get-skills-request', {
             method: 'GET'
@@ -151,6 +171,7 @@ function updateProject(data) {
         noProjectFound.style.display = 'none';
 
         projectImage.src = data[currentProject]['images'][currentImage];
+        projectImage.alt = data[currentProject]['title'] + ' foto';
         projectImage.style.display = 'block';
         projectImageControllers.forEach(controller => controller.style.display = 'block');
         projectTitle.textContent = data[currentProject]['title'];
@@ -198,6 +219,7 @@ function updateSkill(data) {
             // Check if the index exists within the data array bounds
             if (i < data.length) {
                 skillImage.src = data[i]['image'];
+                skillImage.alt = data[i]['name'] + ' foto';
                 skillImage.style.display = 'block';
                 skillName.textContent = data[i]['name'];
                 skillName.style.display = 'block';
@@ -214,6 +236,24 @@ function updateSkill(data) {
         });
 
         noSkillFound.style.display = 'none';
+    }
+}
+
+function updateAboutMe(data) {
+    if (data.length == 0) {
+        noAboutMeFound.style.display = 'block';
+        aboutMeImage.style.display = 'none';
+        aboutMeTitle.style.display = 'none';
+        aboutMeDescription.style.display = 'none';
+    } else {
+        noAboutMeFound.style.display = 'none';
+        aboutMeImage.src = data[currentAboutMe]['image'];
+        aboutMeImage.alt = data[currentAboutMe]['image'];
+        aboutMeImage.style.display = 'block';
+        aboutMeTitle.textContent = data[currentAboutMe]['title'];
+        aboutMeTitle.style.display = 'block';
+        aboutMeDescription.textContent = data[currentAboutMe]['description'];
+        aboutMeDescription.style.display = 'block';
     }
 }
 
@@ -246,11 +286,23 @@ function previousSkill() {
 function nextImage() {
     currentImage = Math.min(currentImage + 1, projectData[currentProject]['images'].length - 1);
     projectImage.src = projectData[currentProject]['images'][currentImage];
+    projectImage.alt = projectData[currentProject]['title'] + ' foto';
 }
 
 function previousImage() {
     currentImage = Math.max(currentImage - 1, 0);
     projectImage.src = projectData[currentProject]['images'][currentImage];
+    projectImage.alt = projectData[currentProject]['title'] + ' foto';
+}
+
+function nextAboutMe() {
+    currentAboutMe = Math.min(currentAboutMe + 1, aboutMeData.length - 1);
+    updateAboutMe(aboutMeData);
+}
+
+function previousAboutMe() {
+    currentAboutMe = Math.max(currentAboutMe - 1, 0);
+    updateAboutMe(aboutMeData);
 }
 
 // Smooth scrolling function using requestAnimationFrame
