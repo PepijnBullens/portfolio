@@ -36,6 +36,7 @@ body {
     transition: all 0.5s ease;
     background-color: $background-color-01;
     overflow: hidden;
+    position: relative;
 
     &.loaded {
         opacity: 1;
@@ -66,7 +67,7 @@ body {
     }
 
     p {
-        font-size: clamp(12px, 1.5vw, 32px);
+        font-size: clamp(12px, 1.5vw, 16px);
     }
 
 

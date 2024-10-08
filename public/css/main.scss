@@ -7,7 +7,7 @@
     z-index: 998;
     position: fixed;
     top: 50%;
-    left: 2rem;
+    left: 60px;
     transform: translateY(-50%);
     display: flex;
     justify-content: center;
@@ -133,6 +133,7 @@
         p {
             width: 50%;
             color: $text-secondary-color;
+            font-size: clamp(12px, 1.5vw, 22px);
         }
     }
 
@@ -354,7 +355,7 @@
                     justify-content: space-between;
                     align-items: center;
                     background-color: $background-color-01;
-                    padding: 10px;
+                    padding: 20px;
                     border-radius: 0 0 10px 10px;
 
                     small {
