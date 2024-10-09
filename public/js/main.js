@@ -26,6 +26,18 @@ const aboutMeTitle = document.querySelector('.about-me-title');
 const aboutMeDescription = document.querySelector('.about-me-description');
 const noAboutMeFound = document.querySelector('.no-about-me-found');
 
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 1000) {
+        skillsPerPage = 3;
+        currentSkill = 0;
+        updateSkill(skillData);
+    } else {
+        skillsPerPage = 1;
+        currentSkill = 0;
+        updateSkill(skillData);
+    }
+});
+
 window.addEventListener('load', () => {
     if (window.innerWidth > 1000) {
         skillsPerPage = 3;
@@ -309,6 +321,7 @@ const dots = document.querySelectorAll('.dot');
 new fullpage('#fullpage', {
     autoScrolling: true,
     navigation: false,
+    normalScrollElements: '.scrollable',
     onLeave: function (origin, destination, direction) {
         yPos = destination.index;
         saveSection();
