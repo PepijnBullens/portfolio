@@ -22,6 +22,19 @@ $border-color: #404040;
     padding: 0;
     font-family: satoshi;
     color: $text-primary-color;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
 }
 
 html {
@@ -35,8 +48,8 @@ body {
     opacity: 0;
     transition: all 0.5s ease;
     background-color: $background-color-01;
-    overflow: hidden;
     position: relative;
+    overflow: auto;
 
     &.loaded {
         opacity: 1;
