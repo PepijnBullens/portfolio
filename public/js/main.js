@@ -335,7 +335,7 @@ new fullpage('#fullpage', {
                 opacity: 0,
                 ease: "power2.out",
                 stagger: 0.2,
-                delay: 0.7,
+                delay: 0.2
             });
         } else if (destination.index == 1) {
 
