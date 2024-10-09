@@ -44,6 +44,9 @@
                 <div class="dot"></div>
                 <p onclick="goTo(4)">over mij</p>
             </li>
+            <li>
+                <div class="dot"></div>
+                <p onclick="goTo(5)">social media</p>
         </ul>
     </div>
 
@@ -171,6 +174,13 @@
                     alt="icon-fast-backword">
                 <img onclick="nextAboutMe();" src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
             </div>
+        </div>
+        <div class="section social-media">
+            <a href="https://www.youtube.com/@Abfebalde" target="_blank"><img src="{{ asset('imgs/youtube.png') }}"
+                    alt="youtube icon"></a><a href="https://www.instagram.com/pepijnbullens/" target="_blank"><img
+                    src="{{ asset('imgs/instagram.png') }}" alt="instagram icon"></a><a
+                href="https://open.spotify.com/user/pepie8" target="_blank"><img src="{{ asset('imgs/spotify.png') }}"
+                    alt="spotify icon"></a>
         </div>
     </div>
 </body>
