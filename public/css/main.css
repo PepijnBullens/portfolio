@@ -339,14 +339,16 @@ body p {
 }
 .section.skills .skills-container .skill {
   width: 33.3333%;
-  height: 70%;
+  height: 60%;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  overflow: hidden;
 }
 .section.skills .skills-container .skill .skill-image {
   width: 100%;
-  height: 70%;
+  height: 75%;
   background-color: #404040;
   padding: 60px;
-  border-radius: 10px 10px 0 0;
 }
 .section.skills .skills-container .skill .skill-image img {
   width: 100%;
@@ -360,8 +362,8 @@ body p {
   justify-content: space-between;
   align-items: center;
   background-color: #262626;
+  height: 25%;
   padding: 20px;
-  border-radius: 0 0 10px 10px;
 }
 .section.skills .skills-container .skill .skill-info small {
   color: #D9D9D9;
@@ -514,7 +516,7 @@ body p {
   }
   .section.intro p {
     line-height: 25px;
-    font-size: clamp(8px, 4vw, 58px);
+    font-size: clamp(16px, 2vw, 58px);
   }
   .section.portfolio .portfolio-project {
     flex-direction: column;

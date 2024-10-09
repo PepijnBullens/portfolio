@@ -18,6 +18,13 @@ class HomePageController extends Controller
         ]);
     }
 
+    public function cmsMain() {
+        $baseUrl = config('app.url');
+        return view('cms-main', [
+            'baseUrl' => $baseUrl
+        ]);
+    }
+
     private function fetchProfilePicture($apiToken, $apiUrl) {
         $response = Http::withToken($apiToken)
             ->get($apiUrl . 'items/profile_picture');

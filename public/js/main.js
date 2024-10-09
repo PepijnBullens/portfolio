@@ -362,9 +362,9 @@ window.addEventListener('wheel', function (event) {
         if (!isScrolling) {
             isScrolling = true;
 
-            if (event.deltaY > 2) {
+            if (event.deltaY > 1) {
                 yPos = Math.min(yPos + 1, sections.length - 1);
-            } else if (event.deltaY < -2) {
+            } else if (event.deltaY < -1) {
                 yPos = Math.max(yPos - 1, 0);
             }
 

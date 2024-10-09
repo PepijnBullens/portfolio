@@ -12,6 +12,10 @@
 
     <script src="{{ asset('js/global.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
+    <script src="{{ asset('js/gsap.js') }}" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.5/ScrollTrigger.min.js"></script>
 </head>
 
 <body>
@@ -43,18 +47,18 @@
     <div class="section home">
         <div class="home-content">
             <div class="home-content-info">
-                <h1>Hey, ik ben Pepijn Bullens</h1>
-                <p>Full-Stack developer</p>
+                <h1 class="animated-text-move-up-intro">Hey, ik ben Pepijn Bullens</h1>
+                <p class="animated-text-move-up-intro">Full-Stack developer</p>
             </div>
             <div class="home-content-image">
-                <img src="{{ $profilePicture }}" alt="Pepijn Bullens">
+                <img class="animated-text-rotate-image-intro" src="{{ $profilePicture }}" alt="Pepijn Bullens">
             </div>
         </div>
     </div>
     <div class="section intro">
-        <p>{!! $introText !!}</p>
+        <p class="animated-text-move-right-intro">{!! $introText !!}</p>
     </div>
-    <div class="section portfolio">
+    <div class="section portfolio animated-text-opacity-projects">
         <div class="portfolio-project">
             <h2 class="no-project-found">Geen project kunnen vinden...</h2>
             <div class="portfolio-image">
@@ -67,15 +71,17 @@
                     src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
             </div>
             <div class="portfolio-info">
-                <h2 class="project-title">Project</h2>
-                <p class="project-description scrollable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <h2 class="project-title animated-text-move-up-projects">Project</h2>
+                <p class="project-description scrollable animated-text-move-up-projects">Lorem ipsum dolor sit amet,
+                    consectetur
+                    adipiscing elit.
                     Nullam nec purus
                     nec nunc
                     ultricies
                     ultricies. Nullam nec purus nec nunc ultricies ultricies.</p>
                 <div class="portfolio-smalls">
-                    <small class="project-date">10/4/2024</small>
-                    <small class="project-link"><a target="_blank">Link naar
+                    <small class="project-date animated-text-move-up-projects">10/4/2024</small>
+                    <small class="project-link animated-text-move-up-projects"><a target="_blank">Link naar
                             project</a></small>
                 </div>
             </div>
@@ -94,7 +100,7 @@
     <div class="section skills">
         <div class="skills-container">
             <h2 class="no-skill-found">Geen vaardigheid kunnen vinden...</h2>
-            <div class="skill">
+            <div class="skill animated-text-move-up-skills">
                 <div class="skill-image">
                     <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                         alt="placeholder">
@@ -104,7 +110,7 @@
                     <small class="skill-info-date">10/4/2024</small>
                 </div>
             </div>
-            <div class="skill">
+            <div class="skill animated-text-move-up-skills">
                 <div class="skill-image">
                     <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                         alt="placeholder">
@@ -114,7 +120,7 @@
                     <small class="skill-info-date">10/4/2024</small>
                 </div>
             </div>
-            <div class="skill">
+            <div class="skill animated-text-move-up-skills">
                 <div class="skill-image">
                     <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                         alt="placeholder">
@@ -143,8 +149,9 @@
                 <img src="{{ asset('imgs/placeholders/about_me_image.png') }}" alt="placeholder">
             </div>
             <div class="about-me-info">
-                <h2 class="about-me-title">over mij</h2>
-                <p class="about-me-description scrollable">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                <h2 class="about-me-title animated-text-move-up-about-me">over mij</h2>
+                <p class="about-me-description scrollable animated-text-move-up-about-me">Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit.
                     Nullam nec
                     purus
                     nec nunc
