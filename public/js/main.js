@@ -328,21 +328,21 @@ new fullpage('#fullpage', {
         updateUI();
 
         if (destination.index == 0) {
-            gsap.from(".animated-text-move-up-intro", {
+            gsap.from(".animated-text-move-up-intro-2", {
+                duration: 1,
+                y: 200,
+                ease: "power2.out",
+                stagger: 0.2,
+            });
+
+            gsap.from(".animated-text-rotate-image-intro-2", {
                 duration: 1,
                 y: 300,
                 ease: "power2.out",
                 stagger: 0.2,
             });
 
-            gsap.from(".animated-text-rotate-image-intro", {
-                duration: 1,
-                y: 300,
-                ease: "power2.out",
-                stagger: 0.2,
-            });
-
-            gsap.from(".animated-text-rotate-image-intro", {
+            gsap.from(".animated-text-rotate-image-intro-2", {
                 duration: 1,
                 rotation: -25,
                 opacity: 0,
@@ -429,4 +429,27 @@ function goTo(index, withAnimation = true) {
 window.addEventListener('load', () => {
     yPos = parseInt(localStorage.getItem('section')) || 0;
     goTo(yPos, false);
+
+    gsap.from(".animated-text-move-up-intro", {
+        duration: 1,
+        y: 300,
+        ease: "power2.out",
+        stagger: 0.2,
+    });
+
+    gsap.from(".animated-text-rotate-image-intro", {
+        duration: 1,
+        y: 300,
+        ease: "power2.out",
+        stagger: 0.2,
+    });
+
+    gsap.from(".animated-text-rotate-image-intro", {
+        duration: 1,
+        rotation: -25,
+        opacity: 0,
+        ease: "power2.out",
+        stagger: 0.2,
+        delay: 0.2
+    });
 });

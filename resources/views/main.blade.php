@@ -54,11 +54,13 @@
         <div class="section home">
             <div class="home-content">
                 <div class="home-content-info">
-                    <h1 class="animated-text-move-up-intro">Hey, ik ben Pepijn Bullens</h1>
-                    <p class="animated-text-move-up-intro">Full-Stack developer</p>
+                    <h1 class="animated-text-move-up-intro animated-text-move-up-intro-2">Hey, ik ben Pepijn Bullens
+                    </h1>
+                    <p class="animated-text-move-up-intro animated-text-move-up-intro-2">Full-Stack developer</p>
                 </div>
                 <div class="home-content-image">
-                    <img class="animated-text-rotate-image-intro" src="{{ $profilePicture }}" alt="Pepijn Bullens">
+                    <img class="animated-text-rotate-image-intro animated-text-rotate-image-intro-2"
+                        src="{{ $profilePicture }}" alt="Pepijn Bullens">
                 </div>
             </div>
         </div>
