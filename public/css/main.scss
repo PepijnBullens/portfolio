@@ -153,6 +153,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             position: relative;
             width: 70%;
             height: 90%;
@@ -163,7 +164,7 @@
                 align-items: center;
                 position: relative;
                 width: 40%;
-                height: 100%;
+                height: 75%;
 
                 .blur-effect.active {
                     position: fixed;
@@ -216,7 +217,7 @@
 
             .portfolio-info {
                 width: 50%;
-                height: 100%;
+                height: 75%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -240,6 +241,56 @@
 
                     small {
                         color: $text-secondary-color;
+                    }
+                }
+            }
+
+            .project-skills {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: center;
+                gap: 10px;
+                width: 100%;
+                max-height: 135px;
+                overflow-y: auto;
+
+                p {
+                    color: $text-secondary-color;
+                    width: 100%;
+                }
+
+                .project-skill {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 10px;
+                    border-radius: 5px;
+                    background-color: $primary-color;
+                    color: $background-color-01;
+                    width: 50px;
+                    transition: all 0.3s ease;
+
+                    &:hover {
+                        width: auto;
+                        background-color: $secondary-color;
+
+                        p {
+                            opacity: 1;
+                            width: auto;
+                            margin-left: 10px;
+                        }
+                    }
+
+                    p {
+                        width: 0;
+                        opacity: 0;
+                        transition: width 0.3s ease;
+                    }
+
+                    img {
+                        width: 30px;
+                        height: 30px;
+                        object-fit: contain;
                     }
                 }
             }
@@ -595,7 +646,7 @@
 
                 .portfolio-info {
                     width: 100%;
-                    height: 50vh;
+                    height: 35vh;
                     max-height: 50vh;
 
                     p {

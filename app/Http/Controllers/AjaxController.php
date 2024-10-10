@@ -151,51 +151,42 @@ class AjaxController extends Controller
         $apiUrl = env('API_URL');
 
         $filter = [
-            'filter[is_private][_eq]' => '0',
-            'sort' => 'order_number'
+            'fields' => '*.*.*'
         ];
 
-        if ($query) {
-            $filter['filter[title][_contains]'] = $query;
-        }
-
         $response = Http::withToken($apiToken)
-        ->get($apiUrl . 'items/portfolio_projects', $filter);
+        ->get($apiUrl . 'items/portfolio_relations', $filter);
 
         // Check response status and handle the response data
         if ($response->successful()) {
             $data = $response->json();
-
             $returnedData = [];
-            foreach($data['data'] as $key => $item) {
-                $returnedData[$key] = [
-                    'date_created' => $item['date_created'],
-                    'title' => $item['title'],
-                    'description' => $item['description'],
-                    'project_link' => $item['project_link'],
-                ];
+
+            foreach($data['data'] as $item) {
+                if($item['project_id'][0]['portfolio_projects_id']['is_private'] === false) {
+                    $skills = [];
+                    $images = [];
     
-                $projectId = $item['id'];
-    
-                $itemResponse = Http::withToken($apiToken)
-                ->get($apiUrl . 'items/portfolio_image', [
-                    'filter[project_id][_eq]' => $projectId
-                ]);
-        
-                // Check response status and handle the response data
-                if ($itemResponse->successful()) {
-                    $itemData = $itemResponse->json();
-    
-                    foreach($itemData['data'] as $image) {
-                        $returnedData[$key]['images'][] = $apiUrl . 'assets/' . $image['image'];
+                    foreach($item['skill_ids'] as $key => $skill) {
+                        $skills[$key] = [
+                            'name' => $skill['skills_id']['name'],
+                            'image' => $apiUrl . 'assets/' . $skill['skills_id']['image']
+                        ];
                     }
-                } else {
-                    Log::error('Failed to fetch projects', [
-                        'status' => $response->status(),
-                        'body' => $response->body()
-                    ]);
+    
+                    foreach($item['image_ids'] as $key => $image) {
+                        $images[$key] = $apiUrl . 'assets/' . $image['portfolio_image_id']['image'];
+                    }
+    
+                    $returnedData[] = [
+                        'title' => $item['project_id'][0]['portfolio_projects_id']['title'],
+                        'description' => $item['project_id'][0]['portfolio_projects_id']['description'],
+                        'images' => $images,
+                        'skills' => $skills
+                    ];
                 }
             }
+
             return response()->json($returnedData);
         } else {
             Log::error('Failed to fetch projects', [

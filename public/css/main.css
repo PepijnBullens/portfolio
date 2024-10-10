@@ -194,6 +194,7 @@ body p {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   position: relative;
   width: 70%;
   height: 90%;
@@ -204,7 +205,7 @@ body p {
   align-items: center;
   position: relative;
   width: 40%;
-  height: 100%;
+  height: 75%;
 }
 .section.portfolio .portfolio-project .portfolio-image .blur-effect.active {
   position: fixed;
@@ -250,7 +251,7 @@ body p {
 }
 .section.portfolio .portfolio-project .portfolio-info {
   width: 50%;
-  height: 100%;
+  height: 75%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -272,6 +273,50 @@ body p {
 }
 .section.portfolio .portfolio-project .portfolio-info .portfolio-smalls small {
   color: #D9D9D9;
+}
+.section.portfolio .portfolio-project .project-skills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-height: 135px;
+  overflow-y: auto;
+}
+.section.portfolio .portfolio-project .project-skills p {
+  color: #D9D9D9;
+  width: 100%;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #404040;
+  color: #262626;
+  width: 50px;
+  transition: all 0.3s ease;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill:hover {
+  width: auto;
+  background-color: #A6A6A6;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill:hover p {
+  opacity: 1;
+  width: auto;
+  margin-left: 10px;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill p {
+  width: 0;
+  opacity: 0;
+  transition: width 0.3s ease;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill img {
+  width: 30px;
+  height: 30px;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 .section.portfolio .portfolio-controller {
   height: 40px;
@@ -566,7 +611,7 @@ body p {
   }
   .section.portfolio .portfolio-project .portfolio-info {
     width: 100%;
-    height: 50vh;
+    height: 35vh;
     max-height: 50vh;
   }
   .section.portfolio .portfolio-project .portfolio-info p {

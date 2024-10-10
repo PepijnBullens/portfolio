@@ -13,6 +13,7 @@ const projectTitle = document.querySelector('.project-title');
 const projectDescription = document.querySelector('.project-description');
 const projectDate = document.querySelector('.project-date');
 const projectLink = document.querySelector('.project-link');
+const projectSkillsContainer = document.querySelector('.project-skills');
 const noProjectFound = document.querySelector('.no-project-found');
 
 let currentSkill = 0;
@@ -196,6 +197,20 @@ function updateProject(data) {
             projectLink.querySelector('a').href = data[currentProject]['project_link'];
             projectLink.style.display = 'block';
         }
+
+        projectSkillsContainer.querySelectorAll('.project-skill').forEach(skill => skill.remove());
+
+        data[currentProject]['skills'].forEach(skill => {
+            const skillElement = document.createElement('div');
+            skillElement.classList.add('project-skill');
+            const skillImage = document.createElement('img');
+            skillImage.src = skill['image'];
+            skillElement.appendChild(skillImage);
+            const skillName = document.createElement('p');
+            skillName.textContent = skill['name'];
+            skillElement.appendChild(skillName);
+            projectSkillsContainer.appendChild(skillElement);
+        });
     }
 }
 

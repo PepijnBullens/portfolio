@@ -113,6 +113,9 @@
                                 project</a></small>
                     </div>
                 </div>
+                <div class="project-skills scrollable">
+                    <p>Gebruikte vaardigheden</p>
+                </div>
             </div>
 
             <div class="portfolio-controller">
