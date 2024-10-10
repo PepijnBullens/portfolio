@@ -378,6 +378,7 @@ new fullpage('#fullpage', {
                 duration: 1,
                 y: 60,
                 ease: "power2.out",
+                delay: 0.4,
                 stagger: 0.1,
             });
         } else if (destination.index == 4) {
