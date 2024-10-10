@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log; // Import the Log facade
 
-class HomePageController extends Controller
+class pageController extends Controller
 {
     public function index() {
         $baseUrl = config('app.url');
@@ -15,13 +15,6 @@ class HomePageController extends Controller
             'baseUrl' => $baseUrl,
             'profilePicture' => $this->fetchProfilePicture($apiToken, $apiUrl),
             'introText' => $this->fetchIntroText($apiToken, $apiUrl)
-        ]);
-    }
-
-    public function cmsMain() {
-        $baseUrl = config('app.url');
-        return view('cms-main', [
-            'baseUrl' => $baseUrl
         ]);
     }
 
