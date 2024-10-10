@@ -134,19 +134,12 @@ class AjaxController extends Controller
         return response()->json([]);
     }    
 
-    public function getProjectsByName(Request $request) {
-
-        $query = $request->input('query');
-
-        return $this->getProjectsData($query);
-    }
-
     public function getProjects()
     {
         return $this->getProjectsData();
     }
 
-    private function getProjectsData($query = null) {
+    private function getProjectsData() {
         $apiToken = env('API_TOKEN');
         $apiUrl = env('API_URL');
 

@@ -87,8 +87,9 @@
             <p class="animated-text-move-right-intro">{!! $introText !!}</p>
         </div>
         <div class="section portfolio animated-text-opacity-projects">
+            <h2 class="no-data-found">Geen project kunnen vinden...</h2>
+
             <div class="portfolio-project">
-                <h2 class="no-project-found">Geen project kunnen vinden...</h2>
                 <div class="portfolio-image">
                     <div onclick="toggleProjectImage()" class="blur-effect"></div>
                     <img class="portfolio-image-controller left" onclick="previousImage();"
@@ -130,8 +131,9 @@
             </div>
         </div>
         <div class="section skills">
+            <h2 class="no-data-found">Geen vaardigheid kunnen vinden...</h2>
+
             <div class="skills-container">
-                <h2 class="no-skill-found">Geen vaardigheid kunnen vinden...</h2>
                 <div class="skill animated-text-move-up-skills">
                     <div class="skill-image">
                         <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
@@ -176,8 +178,9 @@
             </div>
         </div>
         <div class="section about-me">
+            <h2 class="no-data-found">Geen informatie kunnen vinden...</h2>
+
             <div class="about-me">
-                <h2 class="no-about-me-found">Geen informatie kunnen vinden...</h2>
                 <div class="about-me-image">
                     <img src="{{ asset('imgs/placeholders/about_me_image.png') }}" alt="placeholder">
                 </div>

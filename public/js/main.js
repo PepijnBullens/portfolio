@@ -14,18 +14,18 @@ const projectDescription = document.querySelector('.project-description');
 const projectDate = document.querySelector('.project-date');
 const projectLink = document.querySelector('.project-link');
 const projectSkillsContainer = document.querySelector('.project-skills');
-const noProjectFound = document.querySelector('.no-project-found');
+const noProjectFound = document.querySelector('.portfolio .no-data-found');
 
 let currentSkill = 0;
 let skillsPerPage = 3;
 const skillDivs = document.querySelectorAll('.skill');
-const noSkillFound = document.querySelector('.no-skill-found');
+const noSkillFound = document.querySelector('.skills .no-data-found');
 
 let currentAboutMe = 0;
 const aboutMeImage = document.querySelector('.about-me-image img');
 const aboutMeTitle = document.querySelector('.about-me-title');
 const aboutMeDescription = document.querySelector('.about-me-description');
-const noAboutMeFound = document.querySelector('.no-about-me-found');
+const noAboutMeFound = document.querySelector('.about-me .no-data-found');
 
 window.addEventListener('resize', () => {
     if (window.innerWidth > 1000) {
@@ -109,28 +109,16 @@ window.addEventListener('load', () => {
 
 function searchForProject() {
     const query = searchForProjectInput.value;
+    let returnedData = projectData;
 
-    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    if (query != '') {
+        returnedData = projectData.filter(project =>
+            project['title'].toLowerCase().includes(query.toLowerCase())
+        );
+    }
 
-    fetch('/get-projects-by-name-request', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken // Include the CSRF token in the headers
-            },
-            body: JSON.stringify({
-                query: query
-            })
-        })
-        .then(response => response.json())
-        .then(_data => {
-            projectData = _data;
-            currentImage = 0;
-            updateProject(projectData);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+    currentProject = 0;
+    updateProject(returnedData);
 }
 
 function searchForSkill() {
@@ -177,6 +165,8 @@ function updateProject(data) {
         projectDate.style.display = 'none';
         projectLink.style.display = 'none';
 
+        projectSkillsContainer.querySelectorAll('.project-skill').forEach(skill => skill.remove());
+        projectSkillsContainer.style.display = 'none';
     } else {
         noProjectFound.style.display = 'none';
 
@@ -211,6 +201,8 @@ function updateProject(data) {
             skillElement.appendChild(skillName);
             projectSkillsContainer.appendChild(skillElement);
         });
+
+        projectSkillsContainer.style.display = 'flex';
     }
 }
 
