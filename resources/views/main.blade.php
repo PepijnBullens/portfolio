@@ -8,6 +8,25 @@
 
     <title>Portfolio - Pepijn Bullens</title>
 
+    <meta name="description"
+        content="De persoonlijke website van Pepijn Bullens. Bevat zijn portfolio, vaardigheden & verhaal.">
+
+    <meta property="og:title" content="Pepijn Bullens - Portfolio & vaardigheden">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pepijnbullens.nl">
+    <meta property="og:image" content="https://pepijnbullens.nl/pfp.png">
+    <meta property="og:description"
+        content="De persoonlijke website van Pepijn Bullens. Bevat zijn portfolio, vaardigheden & verhaal.">
+    <meta property="og:site_name" content="pepijnbullens.nl">
+    <meta property="og:locale" content="nl_NL">
+
+    <link rel="icon" href="{{ asset('imgs/icons/favicon.ico') }}" sizes="any">
+    <link rel="icon" href="{{ asset('imgs/icons/icon.svg') }}" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="{{ asset('imgs/icons/icon.png') }}">
+
+    <link rel="manifest" href="{{ asset('site.webmanifest') }}">
+    <meta name="theme-color" content="#000000">
+
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
     <script src="{{ asset('js/global.js') }}" defer></script>
