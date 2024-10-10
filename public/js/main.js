@@ -1,6 +1,7 @@
 const searchForProjectInput = document.querySelector('#project-search');
 const searchForSkillInput = document.querySelector('#skill-search');
 
+let originalProjectData = [];
 let projectData = [];
 let skillData = [];
 let aboutMeData = [];
@@ -79,6 +80,7 @@ window.addEventListener('load', () => {
         })
         .then(response => response.json())
         .then(_data => {
+            originalProjectData = _data;
             projectData = _data;
             updateProject(projectData);
         })
@@ -109,16 +111,17 @@ window.addEventListener('load', () => {
 
 function searchForProject() {
     const query = searchForProjectInput.value;
-    let returnedData = projectData;
 
     if (query != '') {
-        returnedData = projectData.filter(project =>
+        projectData = projectData.filter(project =>
             project['title'].toLowerCase().includes(query.toLowerCase())
         );
+    } else {
+        projectData = originalProjectData;
     }
 
     currentProject = 0;
-    updateProject(returnedData);
+    updateProject(projectData);
 }
 
 function searchForSkill() {
