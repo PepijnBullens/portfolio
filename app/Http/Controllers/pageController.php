@@ -42,7 +42,7 @@ class pageController extends Controller
         }
         
         // Return a default image or null if everything fails
-        return asset('placeholders/profile_image.png'); // Provide a default path
+        return asset('imgs/placeholders/profile_image.png'); // Provide a default path
     }
 
     private function fetchIntroText($apiToken, $apiUrl) {

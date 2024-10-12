@@ -156,24 +156,26 @@ class AjaxController extends Controller
             $returnedData = [];
 
             foreach($data['data'] as $item) {
-                if($item['project_id'][0]['portfolio_projects_id']['is_private'] === false) {
+                if($item['project'][0]['portfolio_projects_id']['is_private'] === false) {
                     $skills = [];
                     $images = [];
     
-                    foreach($item['skill_ids'] as $key => $skill) {
+                    foreach($item['skill'] as $key => $skill) {
                         $skills[$key] = [
                             'name' => $skill['skills_id']['name'],
                             'image' => $apiUrl . 'assets/' . $skill['skills_id']['image']
                         ];
                     }
     
-                    foreach($item['image_ids'] as $key => $image) {
-                        $images[$key] = $apiUrl . 'assets/' . $image['portfolio_image_id']['image'];
+                    foreach($item['image'] as $key => $image) {
+                        $images[$key] = $apiUrl . 'assets/' . $image['portfolio_images_id']['image'];
                     }
     
                     $returnedData[] = [
-                        'title' => $item['project_id'][0]['portfolio_projects_id']['title'],
-                        'description' => $item['project_id'][0]['portfolio_projects_id']['description'],
+                        'title' => $item['project'][0]['portfolio_projects_id']['title'],
+                        'description' => $item['project'][0]['portfolio_projects_id']['description'],
+                        'date' => $item['project'][0]['portfolio_projects_id']['date'],
+                        'link' => $item['project'][0]['portfolio_projects_id']['link'] != null ? $item['project'][0]['portfolio_projects_id']['link'] : null,
                         'images' => $images,
                         'skills' => $skills
                     ];

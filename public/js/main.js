@@ -79,7 +79,7 @@ window.addEventListener('load', () => {
             method: 'GET'
         })
         .then(response => response.json())
-        .then(_data => {
+        .then(_data => {                        
             originalProjectData = _data;
             projectData = _data;
             updateProject(projectData);
@@ -181,13 +181,13 @@ function updateProject(data) {
         projectTitle.style.display = 'block';
         projectDescription.textContent = data[currentProject]['description'];
         projectDescription.style.display = 'block';
-        projectDate.textContent = data[currentProject]['date_created'];
+        projectDate.textContent = data[currentProject]['date'];
         projectDate.style.display = 'block';
 
-        if (data[currentProject]['project_link'] == null) {
+        if (data[currentProject]['link'] == null) {
             projectLink.style.display = 'none';
         } else {
-            projectLink.querySelector('a').href = data[currentProject]['project_link'];
+            projectLink.querySelector('a').href = data[currentProject]['link'];
             projectLink.style.display = 'block';
         }
 
