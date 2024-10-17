@@ -500,7 +500,18 @@ function activateFullPage() {
         }
     });
     
-    yPos = parseInt(localStorage.getItem('section')) || 0;
+    const localData = JSON.parse(localStorage.getItem('section'));
+
+    if(localData['yPos'] == null || localData['yPos'] == undefined || localData['yPos'] == '' || localData['yPos'] == NaN || localData['time'] == null || localData['time'] == undefined || localData['time'] == '' || localData['time'] == NaN) {
+        yPos = 0;
+    } else {
+        if (localData && localData['time'] > Date.now() - 1000 * 60 * 60) { // Check if the data is within the last 60 minutes
+            yPos = parseInt(localData['yPos'], 10);
+        } else {
+            yPos = 0;
+        }
+    }
+
     goTo(yPos, false);
 
     gsap.from(".animated-text-move-up-intro", {
@@ -558,5 +569,5 @@ function updateUI() {
 }
 
 function saveSection() {
-    localStorage.setItem('section', yPos);
+    localStorage.setItem('section', JSON.stringify({ 'yPos': yPos, 'time': Date.now() }));
 }
