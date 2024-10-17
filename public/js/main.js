@@ -267,7 +267,7 @@ function updateSkill(data) {
         });
     } else {
         skillDivs.forEach((skillDiv, index) => {
-            skillDiv.querySelector('.skill-loader').style.display = 'none';
+            skillDiv.querySelector('.skill-loader').style.display = 'flex';
 
             // Calculate the correct index in the data array
             const i = currentSkill * skillsPerPage + index;
@@ -288,6 +288,10 @@ function updateSkill(data) {
                 skillName.style.display = 'block';
                 skillDate.textContent = data[i]['date'];
                 skillDate.style.display = 'block';
+
+                skillImage.onload = function() {
+                    skillDiv.querySelector('.skill-loader').style.display = 'none';
+                }
             } else {
                 // If index is out of bounds or exceeds skillsPerPage, hide the elements
                 skillDiv.style.display = 'none';
@@ -309,6 +313,8 @@ function updateAboutMe(data) {
         aboutMeTitle.style.display = 'none';
         aboutMeDescription.style.display = 'none';
     } else {
+        document.querySelector('.about-me-loader').style.display = 'flex';
+
         noAboutMeFound.style.display = 'none';
         aboutMeImage.src = data[currentAboutMe]['image'];
         aboutMeImage.alt = data[currentAboutMe]['image'];
