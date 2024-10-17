@@ -144,6 +144,9 @@
 
             <div class="skills-container">
                 <div class="skill animated-text-move-up-skills">
+                    <div class="skill-loader">
+                        <div></div>
+                    </div>
                     <div class="skill-image">
                         <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                             alt="placeholder">
@@ -154,6 +157,9 @@
                     </div>
                 </div>
                 <div class="skill animated-text-move-up-skills">
+                    <div class="skill-loader">
+                        <div></div>
+                    </div>
                     <div class="skill-image">
                         <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                             alt="placeholder">
@@ -164,6 +170,9 @@
                     </div>
                 </div>
                 <div class="skill animated-text-move-up-skills">
+                    <div class="skill-loader">
+                        <div></div>
+                    </div>
                     <div class="skill-image">
                         <img class="skill-image-image" src="{{ asset('imgs/placeholders/skill_image.png') }}"
                             alt="placeholder">
@@ -191,6 +200,9 @@
 
             <div class="about-me">
                 <div class="about-me-image">
+                    <div class="about-me-loader">
+                        <div></div>
+                    </div>
                     <img src="{{ asset('imgs/placeholders/about_me_image.png') }}" alt="placeholder">
                 </div>
                 <div class="about-me-info">

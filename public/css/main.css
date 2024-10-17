@@ -359,10 +359,34 @@ body p {
   align-items: center;
   padding: 10px;
   border-radius: 5px;
-  background-color: #404040;
   color: #262626;
   width: 50px;
   transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill.active {
+  background-color: #404040;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill .project-skill-loader {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #262626;
+  z-index: 999;
+}
+.section.portfolio .portfolio-project .project-skills .project-skill .project-skill-loader div {
+  width: 40px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#ffffff 90%,#ffffff00);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: 33.3333333333% 100%;
+  animation: l7 1s infinite linear;
 }
 .section.portfolio .portfolio-project .project-skills .project-skill:hover {
   width: auto;
@@ -597,6 +621,26 @@ body p {
   position: relative;
   width: 40%;
   height: 100%;
+}
+.section.about-me .about-me .about-me-image .about-me-loader {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 999;
+  background-color: #2C2C2C;
+}
+.section.about-me .about-me .about-me-image .about-me-loader div {
+  width: 60px;
+  aspect-ratio: 4;
+  --_g: no-repeat radial-gradient(circle closest-side,#ffffff 90%,#ffffff00);
+  background: var(--_g) 0% 50%, var(--_g) 50% 50%, var(--_g) 100% 50%;
+  background-size: 33.3333333333% 100%;
+  animation: l7 1s infinite linear;
 }
 .section.about-me .about-me .about-me-image img {
   width: 100%;

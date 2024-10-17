@@ -220,13 +220,28 @@ function updateProject(data) {
         data[currentProject]['skills'].forEach(skill => {
             const skillElement = document.createElement('div');
             skillElement.classList.add('project-skill');
+            
             const skillImage = document.createElement('img');
             skillImage.src = skill['image'];
+            skillImage.alt = skill['name'] + ' foto';
             skillElement.appendChild(skillImage);
+
             const skillName = document.createElement('p');
             skillName.textContent = skill['name'];
             skillElement.appendChild(skillName);
+
+            const skillLoaderContainer = document.createElement('div');
+            skillLoaderContainer.classList.add('project-skill-loader');
+            const skillLoader = document.createElement('div');
+            skillLoaderContainer.appendChild(skillLoader);
+            skillElement.appendChild(skillLoaderContainer);
+
             projectSkillsContainer.appendChild(skillElement);
+
+            skillImage.onload = function() {
+                skillLoaderContainer.remove();
+                skillElement.classList.add('active');
+            };
         });
 
         projectSkillsContainer.style.display = 'flex';
@@ -252,6 +267,8 @@ function updateSkill(data) {
         });
     } else {
         skillDivs.forEach((skillDiv, index) => {
+            skillDiv.querySelector('.skill-loader').style.display = 'none';
+
             // Calculate the correct index in the data array
             const i = currentSkill * skillsPerPage + index;
 
@@ -300,6 +317,11 @@ function updateAboutMe(data) {
         aboutMeTitle.style.display = 'block';
         aboutMeDescription.textContent = data[currentAboutMe]['description'];
         aboutMeDescription.style.display = 'block';
+
+        aboutMeImage.onload = function() {
+            // Hide loader once the image is loaded
+            document.querySelector('.about-me-loader').style.display = 'none';
+        }
 
         hideLoader();
     }
