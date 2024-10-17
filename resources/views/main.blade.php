@@ -31,7 +31,6 @@
 
     <script src="{{ asset('js/global.js') }}" defer></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
-    <script src="{{ asset('js/gsap.js') }}" defer></script>
 
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 
@@ -41,6 +40,10 @@
 </head>
 
 <body>
+    <div id="page-loader">
+        <div></div>
+    </div>
+
     <div class="side-header">
         <ul>
             <li>
@@ -89,15 +92,21 @@
         <div class="section portfolio animated-text-opacity-projects">
             <h2 class="no-data-found">Geen project kunnen vinden...</h2>
 
+            <div onclick="toggleProjectImage()" class="zoomed-in-blur-effect">
+                <img src="" alt="">
+            </div>
+
             <div class="portfolio-project">
                 <div class="portfolio-image">
-                    <div onclick="toggleProjectImage()" class="blur-effect"></div>
                     <img class="portfolio-image-controller left" onclick="previousImage();"
                         src="{{ asset('imgs/icon-fast-backword.svg') }}" alt="icon-fast-backword">
                     <img onclick="toggleProjectImage()" class="portfolio-image-image"
                         src="{{ asset('imgs/placeholders/project_image.png') }}" alt="placeholder">
                     <img class="portfolio-image-controller right" onclick="nextImage();"
                         src="{{ asset('imgs/icon-fast-forward.svg') }}" alt="icon-fast-forward">
+                    <div class="image-loader">
+                        <div></div>
+                    </div>
                 </div>
                 <div class="portfolio-info">
                     <h2 class="project-title animated-text-move-up-projects">Project</h2>

@@ -1,3 +1,5 @@
+let allPagesLoaded = 0;
+
 const searchForProjectInput = document.querySelector('#project-search');
 const searchForSkillInput = document.querySelector('#skill-search');
 
@@ -16,17 +18,20 @@ const projectDate = document.querySelector('.project-date');
 const projectLink = document.querySelector('.project-link');
 const projectSkillsContainer = document.querySelector('.project-skills');
 const noProjectFound = document.querySelector('.portfolio .no-data-found');
+const projectLoader = document.querySelector('.portfolio .loader');
 
 let currentSkill = 0;
 let skillsPerPage = 3;
 const skillDivs = document.querySelectorAll('.skill');
 const noSkillFound = document.querySelector('.skills .no-data-found');
+const skillLoader = document.querySelector('.skills .loader');
 
 let currentAboutMe = 0;
 const aboutMeImage = document.querySelector('.about-me-image img');
 const aboutMeTitle = document.querySelector('.about-me-title');
 const aboutMeDescription = document.querySelector('.about-me-description');
 const noAboutMeFound = document.querySelector('.about-me .no-data-found');
+const aboutMeLoader = document.querySelector('.about-me .loader');
 
 window.addEventListener('resize', () => {
     if (window.innerWidth > 1000) {
@@ -151,8 +156,22 @@ function searchForSkill() {
 }
 
 function toggleProjectImage() {
-    document.querySelector('.blur-effect').classList.toggle('active');
-    document.querySelector('.portfolio-image-image').classList.toggle('active');
+    const blurEffect = document.querySelector('.zoomed-in-blur-effect');
+    blurEffect.classList.toggle('active');
+
+    blurEffect.querySelector('img').src = projectData[currentProject]['images'][currentImage];
+    blurEffect.querySelector('img').alt = projectData[currentProject]['title'] + ' foto';
+
+    side_header.classList.toggle('active');
+}
+
+function hideLoader() {
+    allPagesLoaded++;
+
+    if(allPagesLoaded == 3) {
+        document.querySelector('#page-loader').style.display = 'none';
+        activateFullPage();
+    }
 }
 
 function updateProject(data) {
@@ -176,6 +195,11 @@ function updateProject(data) {
         projectImage.src = data[currentProject]['images'][currentImage];
         projectImage.alt = data[currentProject]['title'] + ' foto';
         projectImage.style.display = 'block';
+        projectImage.onload = function() {
+            // Hide loader once the image is loaded
+            document.querySelector('.image-loader').style.display = 'none';
+        };
+        
         projectImageControllers.forEach(controller => controller.style.display = 'block');
         projectTitle.textContent = data[currentProject]['title'];
         projectTitle.style.display = 'block';
@@ -206,6 +230,8 @@ function updateProject(data) {
         });
 
         projectSkillsContainer.style.display = 'flex';
+
+        hideLoader();
     }
 }
 
@@ -249,11 +275,13 @@ function updateSkill(data) {
                 // If index is out of bounds or exceeds skillsPerPage, hide the elements
                 skillDiv.style.display = 'none';
             }
+
         });
 
         // Hide the "no skills found" message if it was previously shown
         noSkillFound.style.display = 'none';
 
+        hideLoader();
     }
 }
 
@@ -272,12 +300,15 @@ function updateAboutMe(data) {
         aboutMeTitle.style.display = 'block';
         aboutMeDescription.textContent = data[currentAboutMe]['description'];
         aboutMeDescription.style.display = 'block';
+
+        hideLoader();
     }
 }
 
 function nextProject() {
     if (currentProject < projectData.length - 1) {
         currentImage = 0;
+        loadedImages = 0;
         currentProject = Math.min(currentProject + 1, projectData.length - 1);
         updateProject(projectData);
     }
@@ -286,6 +317,7 @@ function nextProject() {
 function previousProject() {
     if (currentProject > 0) {
         currentImage = 0;
+        loadedImages = 0;
         currentProject = Math.max(currentProject - 1, 0);
         updateProject(projectData);
     }
@@ -301,16 +333,51 @@ function previousSkill() {
     updateSkill(skillData);
 }
 
-function nextImage() {
+let loadedImages = 0;
+let loaderDisplayed = false; // Variable to track if the loader is displayed
+
+function nextImage() {    
+    let oldImage = currentImage;
+
+    // Set image src and alt
     currentImage = Math.min(currentImage + 1, projectData[currentProject]['images'].length - 1);
+
+    if(oldImage !== currentImage && currentImage > loadedImages) {
+        // Show loader after 200 ms if the image hasn't loaded yet
+        const loaderTimeout = setTimeout(() => {
+            document.querySelector('.image-loader').style.display = 'flex';
+            loaderDisplayed = true; // Set the flag to indicate the loader is displayed
+        }, 200);
+        
+        // Reset the loadedImages count
+        loadedImages = currentImage;
+
+        // Set up the onload event for the new image
+        projectImage.onload = function() {
+            // If the loader was displayed, hide it
+            if (loaderDisplayed) {
+                document.querySelector('.image-loader').style.display = 'none';
+            }
+            // Clear the timeout to prevent it from executing if the image loads quickly
+            clearTimeout(loaderTimeout);
+        };
+    }
+
+    // Set the image source (this triggers the loading process)
     projectImage.src = projectData[currentProject]['images'][currentImage];
+
+    // Set the alt text for the image
     projectImage.alt = projectData[currentProject]['title'] + ' foto';
 }
 
 function previousImage() {
+    // Update currentImage index
     currentImage = Math.max(currentImage - 1, 0);
-    projectImage.src = projectData[currentProject]['images'][currentImage];
+
     projectImage.alt = projectData[currentProject]['title'] + ' foto';
+
+    // Set the image source (this triggers the loading process)
+    projectImage.src = projectData[currentProject]['images'][currentImage];
 }
 
 function nextAboutMe() {
@@ -328,116 +395,83 @@ const side_header = document.querySelector('.side-header');
 const sections = document.querySelectorAll('.section');
 const dots = document.querySelectorAll('.dot');
 
-new fullpage('#fullpage', {
-    autoScrolling: true,
-    navigation: false,
-    normalScrollElements: '.scrollable',
-    onLeave: function (origin, destination, direction) {
-        yPos = destination.index;
-        saveSection();
-        updateUI();
 
-        if (destination.index == 0) {
-            gsap.from(".animated-text-move-up-intro-2", {
-                duration: 1,
-                y: 200,
-                ease: "power2.out",
-                stagger: 0.2,
-            });
+function activateFullPage() {
+    new fullpage('#fullpage', {
+        autoScrolling: true,
+        navigation: false,
+        normalScrollElements: '.scrollable',
+        onLeave: function (origin, destination, direction) {
+            yPos = destination.index;
+            saveSection();
+            updateUI();
 
-            gsap.from(".animated-text-rotate-image-intro-2", {
-                duration: 1,
-                y: 300,
-                ease: "power2.out",
-                stagger: 0.2,
-            });
+            if (destination.index == 0) {
+                gsap.from(".animated-text-move-up-intro-2", {
+                    duration: 1,
+                    y: 200,
+                    ease: "power2.out",
+                    stagger: 0.2,
+                });
 
-            gsap.from(".animated-text-rotate-image-intro-2", {
-                duration: 1,
-                rotation: -25,
-                opacity: 0,
-                ease: "power2.out",
-                stagger: 0.2,
-                delay: 0.2
-            });
-        } else if (destination.index == 1) {
+                gsap.from(".animated-text-rotate-image-intro-2", {
+                    duration: 1,
+                    y: 300,
+                    ease: "power2.out",
+                    stagger: 0.2,
+                });
 
-            gsap.from(".animated-text-move-right-intro", {
-                duration: 1,
-                opacity: 0,
-                x: -100,
-                ease: "power2.out",
-                stagger: 0.2,
-            });
-        } else if (destination.index == 2) {
-            gsap.from(".animated-text-move-up-projects", {
-                duration: 1,
-                y: 80,
-                ease: "power2.out",
-                stagger: 0.1,
-            });
+                gsap.from(".animated-text-rotate-image-intro-2", {
+                    duration: 1,
+                    rotation: -25,
+                    opacity: 0,
+                    ease: "power2.out",
+                    stagger: 0.2,
+                    delay: 0.2
+                });
+            } else if (destination.index == 1) {
 
-            gsap.from(".animated-text-opacity-projects", {
-                duration: 2,
-                opacity: 0,
-                ease: "power2.out",
-                stagger: 0.2,
-            });
-        } else if (destination.index == 3) {
-            gsap.from(".animated-text-move-up-skills", {
-                duration: 1,
-                y: 60,
-                ease: "power2.out",
-                delay: 0.4,
-                stagger: 0.1,
-            });
-        } else if (destination.index == 4) {
-            gsap.from(".animated-text-move-up-about-me", {
-                duration: 1,
-                y: 80,
-                ease: "power2.out",
-                stagger: 0.1,
-            });
+                gsap.from(".animated-text-move-right-intro", {
+                    duration: 1,
+                    opacity: 0,
+                    x: -100,
+                    ease: "power2.out",
+                    stagger: 0.2,
+                });
+            } else if (destination.index == 2) {
+                gsap.from(".animated-text-move-up-projects", {
+                    duration: 1,
+                    y: 80,
+                    ease: "power2.out",
+                    stagger: 0.1,
+                });
 
+                gsap.from(".animated-text-opacity-projects", {
+                    duration: 2,
+                    opacity: 0,
+                    ease: "power2.out",
+                    stagger: 0.2,
+                });
+            } else if (destination.index == 3) {
+                gsap.from(".animated-text-move-up-skills", {
+                    duration: 1,
+                    y: 60,
+                    ease: "power2.out",
+                    delay: 0.4,
+                    stagger: 0.1,
+                });
+            } else if (destination.index == 4) {
+                gsap.from(".animated-text-move-up-about-me", {
+                    duration: 1,
+                    y: 80,
+                    ease: "power2.out",
+                    stagger: 0.1,
+                });
+
+            }
         }
-    }
-});
-
-function updateUI() {
-    if (yPos == 0) {
-        side_header.classList.remove('active');
-    } else {
-        side_header.classList.add('active');
-    }
-
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index == yPos);
     });
-}
-
-function saveSection() {
-    localStorage.setItem('section', yPos);
-}
-
-function goTo(index, withAnimation = true) {
-    yPos = index;
-    updateUI();
-    saveSection();
-
-    if (withAnimation) {
-        fullpage_api.moveTo(yPos + 1);
-    } else {
-        fullpage_api.setScrollingSpeed(0); // Set scrolling speed to 0 for no animation
-
-        fullpage_api.moveTo(yPos + 1);
-
-        setTimeout(function () {
-            fullpage_api.setScrollingSpeed(700); // Restore scrolling speed to normal
-        }, 100);
-    }
-}
-
-window.addEventListener('load', () => {
+    
     yPos = parseInt(localStorage.getItem('section')) || 0;
     goTo(yPos, false);
 
@@ -463,4 +497,38 @@ window.addEventListener('load', () => {
         stagger: 0.2,
         delay: 0.2
     });
-});
+}
+
+function goTo(index, withAnimation = true) {
+    yPos = index;
+    updateUI();
+    saveSection();
+
+    if (withAnimation) {
+        fullpage_api.moveTo(yPos + 1);
+    } else {
+        fullpage_api.setScrollingSpeed(0); // Set scrolling speed to 0 for no animation
+
+        fullpage_api.moveTo(yPos + 1);
+
+        setTimeout(function () {
+            fullpage_api.setScrollingSpeed(700); // Restore scrolling speed to normal
+        }, 100);
+    }
+}
+
+function updateUI() {
+    if (yPos == 0) {
+        side_header.classList.remove('active');
+    } else {
+        side_header.classList.add('active');
+    }
+
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index == yPos);
+    });
+}
+
+function saveSection() {
+    localStorage.setItem('section', yPos);
+}

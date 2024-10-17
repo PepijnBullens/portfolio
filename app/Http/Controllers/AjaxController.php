@@ -70,7 +70,7 @@ class AjaxController extends Controller
         ];
 
         if ($query) {
-            $filter['filter[name][_contains]'] = $query;
+            $filter['filter[name][_icontains]'] = strtolower($query);
         }
 
         $response = Http::withToken($apiToken)
