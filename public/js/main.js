@@ -1,3 +1,14 @@
+const localData = JSON.parse(localStorage.getItem('section'));
+let yPos = 0;
+
+if(localData != null) {
+    if (localData && localData['time'] > Date.now() - 1000 * 60 * 60) { // Check if the data is within the last 60 minutes
+        yPos = parseInt(localData['yPos'], 10);
+    } else {
+        yPos = 0;
+    }
+}
+
 let allPagesLoaded = 0;
 
 const searchForProjectInput = document.querySelector('#project-search');
@@ -418,7 +429,6 @@ function previousAboutMe() {
     updateAboutMe(aboutMeData);
 }
 
-let yPos = 0;
 const side_header = document.querySelector('.side-header');
 const sections = document.querySelectorAll('.section');
 const dots = document.querySelectorAll('.dot');
@@ -499,18 +509,6 @@ function activateFullPage() {
             }
         }
     });
-    
-    const localData = JSON.parse(localStorage.getItem('section'));
-
-    if(localData['yPos'] == null || localData['yPos'] == undefined || localData['yPos'] == '' || localData['yPos'] == NaN || localData['time'] == null || localData['time'] == undefined || localData['time'] == '' || localData['time'] == NaN) {
-        yPos = 0;
-    } else {
-        if (localData && localData['time'] > Date.now() - 1000 * 60 * 60) { // Check if the data is within the last 60 minutes
-            yPos = parseInt(localData['yPos'], 10);
-        } else {
-            yPos = 0;
-        }
-    }
 
     goTo(yPos, false);
 
